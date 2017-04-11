@@ -4,9 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:destiny_chat_client"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        xmlns:components="clr-namespace:destiny_chat_client.Views.Components"
+        Title="destiny.gg chat"
+        Width="500"
+        Height="730"
+        Name="Window"
+        Foreground="White"
+        Background="#080808"
+        ResizeMode="CanResizeWithGrip"
+        TextElement.FontSize="16"
+        TextElement.FontWeight="Regular"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        mc:Ignorable="d">
+    <DockPanel>
+        <components:ChatBar DockPanel.Dock="Bottom" />
+        <components:Chat />
+    </DockPanel>
 </Window>
