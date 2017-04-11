@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Windows;
+using static destiny_chat_client.Classes.WindowHandler;
 
 namespace destiny_chat_client.Views
 {
@@ -9,7 +13,23 @@ namespace destiny_chat_client.Views
     {
         public MainWindow()
         {
-            InitializeComponent();
+            if (AlreadyOpen)
+            {
+                FocusChat();
+                Close();
+            }
+
+            else
+                InitializeComponent();
+        }
+
+        private static bool AlreadyOpen
+        {
+            get
+            {
+                var name = Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location);
+                return Process.GetProcessesByName(name).Length > 1;
+            }
         }
     }
 }
