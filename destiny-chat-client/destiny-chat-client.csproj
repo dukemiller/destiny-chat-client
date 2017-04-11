@@ -123,6 +123,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\WindowHandler.cs" />
+    <Compile Include="Enums\Emote.cs" />
+    <Compile Include="Enums\Feature.cs" />
+    <Compile Include="Enums\Flair.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
