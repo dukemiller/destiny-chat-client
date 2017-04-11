@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -178,6 +181,108 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Emoticons\Abathur.png" />
+    <Resource Include="Resources\Emoticons\AngelThump.png" />
+    <Resource Include="Resources\Emoticons\ASLAN.png" />
+    <Resource Include="Resources\Emoticons\AYYYLMAO.png" />
+    <Resource Include="Resources\Emoticons\BasedGod.png" />
+    <Resource Include="Resources\Emoticons\BASEDWATM8.png" />
+    <Resource Include="Resources\Emoticons\BERN.png" />
+    <Resource Include="Resources\Emoticons\BibleThump.png" />
+    <Resource Include="Resources\Emoticons\CallCatz.png" />
+    <Resource Include="Resources\Emoticons\CallChad.png" />
+    <Resource Include="Resources\Emoticons\CheekerZ.png" />
+    <Resource Include="Resources\Emoticons\DaFeels.png" />
+    <Resource Include="Resources\Emoticons\DAFUK.png" />
+    <Resource Include="Resources\Emoticons\DANKMEMES.png" />
+    <Resource Include="Resources\Emoticons\DappaKappa.png" />
+    <Resource Include="Resources\Emoticons\DatGeoff.png" />
+    <Resource Include="Resources\Emoticons\DestiSenpaii.png" />
+    <Resource Include="Resources\Emoticons\Disgustiny.png" />
+    <Resource Include="Resources\Emoticons\DJAslan.png" />
+    <Resource Include="Resources\Emoticons\Dravewin.png" />
+    <Resource Include="Resources\Emoticons\DuckerZ.png" />
+    <Resource Include="Resources\Emoticons\DURRSTINY.png" />
+    <Resource Include="Resources\Emoticons\FeedNathan.png" />
+    <Resource Include="Resources\Emoticons\FerretLOL.png" />
+    <Resource Include="Resources\Emoticons\FIDGETLOL.png" />
+    <Resource Include="Resources\Emoticons\FrankerZ.png" />
+    <Resource Include="Resources\Emoticons\GameOfThrows.png" />
+    <Resource Include="Resources\Emoticons\Heimerdonger.png" />
+    <Resource Include="Resources\Emoticons\Hhhehhehe.png" />
+    <Resource Include="Resources\Emoticons\HmmStiny.png" />
+    <Resource Include="Resources\Emoticons\INFESTINY.png" />
+    <Resource Include="Resources\Emoticons\Kappa.png" />
+    <Resource Include="Resources\Emoticons\KappaRoss.png" />
+    <Resource Include="Resources\Emoticons\Klappa.png" />
+    <Resource Include="Resources\Emoticons\LeRuse.png" />
+    <Resource Include="Resources\Emoticons\LIES.png" />
+    <Resource Include="Resources\Emoticons\LUL.png" />
+    <Resource Include="Resources\Emoticons\MASTERB8.png" />
+    <Resource Include="Resources\Emoticons\Memegasm.png" />
+    <Resource Include="Resources\Emoticons\MLADY.png" />
+    <Resource Include="Resources\Emoticons\MotherFuckinGame.png" />
+    <Resource Include="Resources\Emoticons\Nappa.png" />
+    <Resource Include="Resources\Emoticons\nathanD.png" />
+    <Resource Include="Resources\Emoticons\nathanDank.png" />
+    <Resource Include="Resources\Emoticons\nathanF.png" />
+    <Resource Include="Resources\Emoticons\nathanNotears.png" />
+    <Resource Include="Resources\Emoticons\nathanPepe.png" />
+    <Resource Include="Resources\Emoticons\nathanRuse.png" />
+    <Resource Include="Resources\Emoticons\nathanRustle.png" />
+    <Resource Include="Resources\Emoticons\nathanThinking.png" />
+    <Resource Include="Resources\Emoticons\nathanTowel.png" />
+    <Resource Include="Resources\Emoticons\nathanWat.png" />
+    <Resource Include="Resources\Emoticons\nathanWeeb.png" />
+    <Resource Include="Resources\Emoticons\nathanYee.png" />
+    <Resource Include="Resources\Emoticons\NoTears.png" />
+    <Resource Include="Resources\Emoticons\NOTMYTEMPO.png" />
+    <Resource Include="Resources\Emoticons\OhKrappa.png" />
+    <Resource Include="Resources\Emoticons\OverRustle.png" />
+    <Resource Include="Resources\Emoticons\PEPE.png" />
+    <Resource Include="Resources\Emoticons\PepoThink.png" />
+    <Resource Include="Resources\Emoticons\PICNIC.png" />
+    <Resource Include="Resources\Emoticons\Sippy.png" />
+    <Resource Include="Resources\Emoticons\SLEEPSTINY.png" />
+    <Resource Include="Resources\Emoticons\SoDoge.png" />
+    <Resource Include="Resources\Emoticons\SoSad.png" />
+    <Resource Include="Resources\Emoticons\SOTRIGGERED.png" />
+    <Resource Include="Resources\Emoticons\SpookerZ.png" />
+    <Resource Include="Resources\Emoticons\SURPRISE.png" />
+    <Resource Include="Resources\Emoticons\SWEATSTINY.png" />
+    <Resource Include="Resources\Emoticons\TRUMPED.png" />
+    <Resource Include="Resources\Emoticons\UWOTM8.png" />
+    <Resource Include="Resources\Emoticons\WEEWOO.png" />
+    <Resource Include="Resources\Emoticons\WhoahDude.png" />
+    <Resource Include="Resources\Emoticons\WORTH.png" />
+    <Resource Include="Resources\Emoticons\YEE.png" />
+    <EmbeddedResource Include="Resources\icon.ico" />
+    <Resource Include="Resources\Icons\bot.png" />
+    <Resource Include="Resources\Icons\bot2.png" />
+    <Resource Include="Resources\Icons\bot_hover.png" />
+    <Resource Include="Resources\Icons\broadcaster.png" />
+    <Resource Include="Resources\Icons\command.png" />
+    <Resource Include="Resources\Icons\compchallenge.png" />
+    <Resource Include="Resources\Icons\contributor.png" />
+    <Resource Include="Resources\Icons\error.png" />
+    <Resource Include="Resources\Icons\eve.png" />
+    <Resource Include="Resources\Icons\info.png" />
+    <Resource Include="Resources\Icons\mail-open-document.png" />
+    <Resource Include="Resources\Icons\mail-receive.png" />
+    <Resource Include="Resources\Icons\mail-send.png" />
+    <Resource Include="Resources\Icons\mail.png" />
+    <Resource Include="Resources\Icons\minitwitch.png" />
+    <Resource Include="Resources\Icons\moderator.png" />
+    <Resource Include="Resources\Icons\notable.png" />
+    <Resource Include="Resources\Icons\sc2.png" />
+    <Resource Include="Resources\Icons\status.png" />
+    <Resource Include="Resources\Icons\subscriber.png" />
+    <Resource Include="Resources\Icons\subscribert2.png" />
+    <Resource Include="Resources\Icons\subscribert3.png" />
+    <Resource Include="Resources\Icons\subscribert4.png" />
+    <Resource Include="Resources\Icons\trusted.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />
