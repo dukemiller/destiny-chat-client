@@ -140,6 +140,8 @@
     <Compile Include="Models\Socket\Response.cs" />
     <Compile Include="Models\Socket\SendMessage.cs" />
     <Compile Include="Models\UserData.cs" />
+    <Compile Include="Services\Interfaces\IChatService.cs" />
+    <Compile Include="Services\Interfaces\ICookieFinderService.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
