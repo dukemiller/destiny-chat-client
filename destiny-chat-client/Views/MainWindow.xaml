@@ -15,6 +15,7 @@
         TextElement.FontSize="16"
         TextElement.FontWeight="Regular"
         TextOptions.TextFormattingMode="Ideal"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
         TextOptions.TextRenderingMode="Auto"
         mc:Ignorable="d">
     <DockPanel>
