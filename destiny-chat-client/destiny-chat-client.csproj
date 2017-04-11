@@ -133,6 +133,8 @@
     <Compile Include="Enums\Emote.cs" />
     <Compile Include="Enums\Feature.cs" />
     <Compile Include="Enums\Flair.cs" />
+    <Compile Include="Enums\ServerError.cs" />
+    <Compile Include="Models\Data.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Socket\OnConnect.cs" />
     <Compile Include="Models\Socket\Response.cs" />
