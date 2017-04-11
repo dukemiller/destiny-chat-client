@@ -122,10 +122,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\Extensions.cs" />
     <Compile Include="Classes\WindowHandler.cs" />
     <Compile Include="Enums\Emote.cs" />
     <Compile Include="Enums\Feature.cs" />
     <Compile Include="Enums\Flair.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Socket\OnConnect.cs" />
+    <Compile Include="Models\Socket\Response.cs" />
+    <Compile Include="Models\Socket\SendMessage.cs" />
+    <Compile Include="Models\UserData.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
