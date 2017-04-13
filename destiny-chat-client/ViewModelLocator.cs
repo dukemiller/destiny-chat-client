@@ -20,6 +20,7 @@ namespace destiny_chat_client
             SimpleIoc.Default.Register<IFlairRepository, FlairRepository>();
             SimpleIoc.Default.Register<ISoundRepository, SoundRepository>();
 
+            SimpleIoc.Default.Register<IDataConverterService, DataConverterService>();
             SimpleIoc.Default.Register<ICookieFinderService, CookieFinderService>();
 
             SimpleIoc.Default.Register<IChatService, ChatService>();

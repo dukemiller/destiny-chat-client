@@ -1,20 +1,46 @@
 ﻿<UserControl x:Class="destiny_chat_client.Views.Components.Message"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:destiny_chat_client.Views.Components"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Border>
-        <RichTextBox
-            IsReadOnly="True"
-            IsDocumentEnabled="True"
-            BorderThickness="0"
-            FocusVisualStyle="{x:Null}"
-            Cursor="Arrow"
-            Background="Transparent"
-            ForceCursor="True"
-            IsTabStop="False"/>
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:models="clr-namespace:destiny_chat_client.Models"
+             mc:Ignorable="d"
+             DataContextChanged="Message_SetModel"
+             d:DesignWidth="500"
+             d:DesignHeight="70"
+             d:DataContext="{d:DesignInstance models:Message}">
+    <Border Padding="0,4,0,4" BorderThickness="0" PreviewMouseDown="BorderDefocus" Focusable="False">
+        <Border.Resources>
+            <Style TargetType="Border">
+                <Setter Property="Opacity" Value="1.0" />
+                <Setter Property="Background" Value="#080808" />
+                <Setter Property="BorderBrush" Value="Red" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsUser}" Value="True">
+                        <Setter Property="Background" Value="#151515" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Dimmed}" Value="True">
+                        <Setter Property="Opacity" Value="0.4" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Highlighted}" Value="True">
+                        <Setter Property="Background" Value="#153045" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Resources>
+        <RichTextBox IsReadOnly="True"
+                     IsDocumentEnabled="True"
+                     BorderThickness="0"
+                     FocusVisualStyle="{x:Null}"
+                     Cursor="Arrow"
+                     Background="Transparent"
+                     PreviewMouseDown="RichTextBoxDefocus"
+                     ForceCursor="True"
+                     IsTabStop="False">
+            <RichTextBox.CommandBindings>
+                <CommandBinding Command="{x:Static ApplicationCommands.Copy}"
+                                Executed="CommandBinding_OnExecuted" />
+            </RichTextBox.CommandBindings>
+        </RichTextBox>
     </Border>
 </UserControl>
