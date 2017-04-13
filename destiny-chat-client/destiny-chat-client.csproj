@@ -171,7 +171,9 @@
     <Compile Include="Repositories\Interfaces\IEmoteRepository.cs" />
     <Compile Include="Repositories\Interfaces\IFlairRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISettingsRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ISoundRepository.cs" />
     <Compile Include="Repositories\SettingsRepository.cs" />
+    <Compile Include="Repositories\SoundRepository.cs" />
     <Compile Include="Services\ChatService.cs" />
     <Compile Include="Services\CookieFinderService.cs" />
     <Compile Include="Services\Interfaces\IChatService.cs" />
@@ -336,6 +338,9 @@
     <Resource Include="Resources\Icons\subscribert3.png" />
     <Resource Include="Resources\Icons\subscribert4.png" />
     <Resource Include="Resources\Icons\trusted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Sfx\notification.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />
