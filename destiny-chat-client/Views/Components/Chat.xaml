@@ -74,7 +74,7 @@
             </ListBox.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <components:Message DataContext="{Binding .}" />
+                    <components:Message DataContext="{Binding}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ListBox>

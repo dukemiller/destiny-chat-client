@@ -36,22 +36,7 @@ namespace destiny_chat_client.Views.Components
             _scrollViewer = (ScrollViewer)GetDescendantByType(this, typeof(ScrollViewer));
             _scrollViewer.ScrollChanged += ScrollViewer_OnScrollChanged;
         }
-
-        private void ListBoxItem_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                var lbi = sender as ListBoxItem;
-                if (lbi != null)
-                {
-                    lbi.IsSelected = true;
-                    lbi.Focus();
-                    // MessageBox.Show("WEHAWE");
-                    // lb.SelectedItems.Add(lbi);
-                }
-            }
-        }
-
+        
         // http://stackoverflow.com/questions/16683477/change-scrollviewer-template-in-listbox
         // http://stackoverflow.com/questions/2984803/how-to-automatically-scroll-scrollviewer-only-if-the-user-did-not-change-scrol
         private void ScrollViewer_OnScrollChanged(object sender, ScrollChangedEventArgs e)

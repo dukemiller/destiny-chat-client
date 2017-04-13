@@ -101,14 +101,14 @@ namespace destiny_chat_client.ViewModels
         {
             Application.Current.Dispatcher.Invoke(async () =>
             {
-                //if (Views.Components.Chat.AutoScroll && Chat.Count >= 189)
-                //{
-                //    if (Chat.Count > 200)
-                //        foreach (var _ in Enumerable.Range(0, 5))
-                //            Chat.RemoveAt(0);
+                if (Views.Components.Chat.AutoScroll && Chat.Count >= 189)
+                {
+                    if (Chat.Count > 200)
+                        foreach (var _ in Enumerable.Range(0, 5))
+                            Chat.RemoveAt(0);
 
-                //    Chat.RemoveAt(0);
-                //}
+                    Chat.RemoveAt(0);
+                }
 
                 if (Highlighting)
                 {

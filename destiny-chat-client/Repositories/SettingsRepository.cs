@@ -20,6 +20,8 @@ namespace destiny_chat_client.Repositories
 
         private string _username = "";
 
+        private string _highlightWords = "";
+
         private bool _showFlair = true;
 
         private bool _showTimestamp;
@@ -33,8 +35,6 @@ namespace destiny_chat_client.Repositories
         private bool _trayAlwaysOpen = true;
 
         private bool _minimizeToTray;
-
-        private string _highlightWords;
 
         private bool _toastOnMention;
 
