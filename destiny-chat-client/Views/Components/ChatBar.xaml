@@ -4,20 +4,123 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:destiny_chat_client.Views.Components"
+             xmlns:viewModels="clr-namespace:destiny_chat_client.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              Background="#080808"
+             d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
              d:DesignHeight="50" d:DesignWidth="480">
     <Border BorderThickness="2" CornerRadius="3" BorderBrush="#222222">
         <DockPanel>
-            <DockPanel DockPanel.Dock="Right">
-                
+            <DockPanel DockPanel.Dock="Right" Background="#222222">
+                <materialDesign:PackIcon Background="#222222"
+                                         VerticalAlignment="Center"
+                                         DockPanel.Dock="Right"
+                                         Kind="Account"
+                                         Margin="5"
+                                         Width="25"
+                                         Height="25">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding UserlistCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <materialDesign:PackIcon.Resources>
+                        <Style TargetType="materialDesign:PackIcon">
+                            <Setter Property="Foreground" Value="#413D34" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="White" />
+                                </Trigger>
+                                <DataTrigger Binding="{Binding IsShowingUserlist}" Value="True">
+                                    <Setter Property="Foreground" Value="White" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:PackIcon.Resources>
+                </materialDesign:PackIcon>
+                <materialDesign:PackIcon Background="#222222" Kind="Settings"
+                                         Width="25"
+                                         Margin="5"
+                                         VerticalAlignment="Center"
+                                         Height="25">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding SettingsCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <materialDesign:PackIcon.Resources>
+                        <Style TargetType="materialDesign:PackIcon">
+                            <Setter Property="Foreground" Value="#413D34" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="White" />
+                                </Trigger>
+                                <DataTrigger Binding="{Binding IsShowingSettings}" Value="True">
+                                    <Setter Property="Foreground" Value="White" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:PackIcon.Resources>
+                </materialDesign:PackIcon>
             </DockPanel>
-            <TextBox Margin="5"
+            <materialDesign:PackIcon Background="#080808" Kind="EmoticonHappy"
+                                     DockPanel.Dock="Right"
+                                     Margin="4"
+                                     VerticalAlignment="Center"
+                                     Width="25"
+                                     Height="25">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseUp">
+                        <i:InvokeCommandAction Command="{Binding EmotesCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <materialDesign:PackIcon.Resources>
+                    <Style TargetType="materialDesign:PackIcon">
+                        <Setter Property="Foreground" Value="#413D34" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                            <DataTrigger Binding="{Binding IsShowingEmotes}" Value="True">
+                                <Setter Property="Foreground" Value="White" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </materialDesign:PackIcon.Resources>
+            </materialDesign:PackIcon>
+            <TextBox materialDesign:HintAssist.Hint="{Binding ChatHint}"
+                     materialDesign:HintAssist.HintOpacity="0.4"
+                     Margin="5"
                      DockPanel.Dock="Bottom"
                      Background="#080808"
                      Foreground="#759999"
                      VerticalAlignment="Center"
-                     HorizontalAlignment="Stretch" />
+                     HorizontalAlignment="Stretch"
+                     KeyDown="UIElement_OnKeyDown"
+                     TextChanged="TextBoxBase_OnTextChanged"
+                     IsEnabled="{Binding LoggedIn}"
+                     Text="{Binding Message,
+                                    UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Escape" Command="{Binding ClearCommand}" />
+                    <KeyBinding Key="Enter" Command="{Binding SendCommand}" />
+                    <KeyBinding Key="Tab" Command="{Binding AutoCompleteCommand}" />
+                    <KeyBinding Key="Up" Command="{Binding PreviousMessageCommand}" />
+                    <KeyBinding Key="Down" Command="{Binding NextMessageCommand}" />
+                </TextBox.InputBindings>
+                <TextBox.Resources>
+                    <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                        <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
+                        <Style.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="TextBlock.TextDecorations" Value="None" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
         </DockPanel>
     </Border>
 </UserControl>

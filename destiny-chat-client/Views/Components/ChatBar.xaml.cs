@@ -24,5 +24,21 @@ namespace destiny_chat_client.Views.Components
         {
             InitializeComponent();
         }
+
+        private void UIElement_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Tab)
+                e.Handled = true;
+        }
+
+        private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            // selection change on auto complete (I guess it works)
+            if (e.Changes.Sum(change => change.AddedLength) > 1)
+            {
+                var textbox = (TextBox)sender;
+                textbox.CaretIndex = textbox.Text.Length;
+            }
+        }
     }
 }
