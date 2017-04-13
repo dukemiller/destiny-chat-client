@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:destiny_chat_client"
         xmlns:components="clr-namespace:destiny_chat_client.Views.Components"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         Title="destiny.gg chat"
         Width="500"
         Height="730"
@@ -18,6 +20,11 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
         TextOptions.TextRenderingMode="Auto"
         mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding TrayCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <DockPanel>
         <components:ChatBar DockPanel.Dock="Bottom" />
         <components:Chat />
