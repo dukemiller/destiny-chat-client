@@ -25,8 +25,15 @@
             <i:InvokeCommandAction Command="{Binding TrayCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <DockPanel>
-        <components:ChatBar DockPanel.Dock="Bottom" />
-        <components:Chat />
-    </DockPanel>
+    <materialDesign:DialogHost CloseOnClickAway="True" IsOpen="{Binding IsShowingPopup}"
+                               DialogContent="{Binding PopupView}">
+        <materialDesign:DialogHost.InputBindings>
+            <KeyBinding Key="Escape" Command="{Binding ClosePopupCommand}" />
+            <KeyBinding Key="S" Modifiers="Control" Command="{Binding SettingsCommand}" />
+        </materialDesign:DialogHost.InputBindings>
+        <DockPanel>
+            <components:ChatBar DockPanel.Dock="Bottom" />
+            <components:Chat />
+        </DockPanel>
+    </materialDesign:DialogHost>
 </Window>

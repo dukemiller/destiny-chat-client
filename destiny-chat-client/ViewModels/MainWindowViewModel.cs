@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Controls;
+using System.Windows.Forms;
 using destiny_chat_client.Classes;
 using destiny_chat_client.Enums;
 using destiny_chat_client.Repositories.Interfaces;
+using destiny_chat_client.Services;
 using destiny_chat_client.Services.Interfaces;
 using destiny_chat_client.Views.Dialogs;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace destiny_chat_client.ViewModels
 {
@@ -123,8 +125,9 @@ namespace destiny_chat_client.ViewModels
             LoggedIn = SettingsRepository.LoggedIn;
             PreviousMessageCommand = new RelayCommand(PreviousMessage);
             NextMessageCommand = new RelayCommand(NextMessage);
+            
         }
-
+        
         // Popup logic
 
         public bool IsShowingPopup
