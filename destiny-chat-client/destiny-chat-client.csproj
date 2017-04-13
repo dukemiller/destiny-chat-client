@@ -129,6 +129,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Dialogs\Debug.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Dialogs\Emotes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -160,6 +164,7 @@
     <Compile Include="Classes\FlashWindowHelper.cs" />
     <Compile Include="Classes\Tray.cs" />
     <Compile Include="Classes\WindowHandler.cs" />
+    <Compile Include="Enums\DebugScenario.cs" />
     <Compile Include="Enums\Emote.cs" />
     <Compile Include="Enums\Feature.cs" />
     <Compile Include="Enums\Flair.cs" />
@@ -187,6 +192,7 @@
     <Compile Include="Services\Interfaces\IChatService.cs" />
     <Compile Include="Services\Interfaces\ICookieFinderService.cs" />
     <Compile Include="Services\Interfaces\IDataConverterService.cs" />
+    <Compile Include="Services\MockChatService.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -201,6 +207,9 @@
     </Compile>
     <Compile Include="Views\Components\Message.xaml.cs">
       <DependentUpon>Message.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Debug.xaml.cs">
+      <DependentUpon>Debug.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\Emotes.xaml.cs">
       <DependentUpon>Emotes.xaml</DependentUpon>
