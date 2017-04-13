@@ -9,7 +9,7 @@ namespace destiny_chat_client.Models
     {
         private bool _dimmed;
 
-        private bool _highlighted;
+        private bool _mention;
 
         private bool _isUser;
 
@@ -47,10 +47,10 @@ namespace destiny_chat_client.Models
         ///     of this post, or if a key word the user has written was mentioned.
         /// </summary>
         [JsonIgnore]
-        public bool Highlighted
+        public bool Mention
         {
-            get => _highlighted;
-            set => Set(() => Highlighted, ref _highlighted, value);
+            get => _mention;
+            set => Set(() => Mention, ref _mention, value);
         }
     }
 }
