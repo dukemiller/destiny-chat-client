@@ -149,6 +149,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\Behaviors.cs" />
     <Compile Include="Classes\Converters.cs" />
     <Compile Include="Classes\Distance.cs" />
     <Compile Include="Classes\Extensions.cs" />
