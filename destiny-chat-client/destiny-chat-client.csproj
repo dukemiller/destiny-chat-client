@@ -148,6 +148,7 @@
     <Compile Include="Repositories\Interfaces\IFlairRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISettingsRepository.cs" />
     <Compile Include="Repositories\SettingsRepository.cs" />
+    <Compile Include="Services\ChatService.cs" />
     <Compile Include="Services\Interfaces\IChatService.cs" />
     <Compile Include="Services\Interfaces\ICookieFinderService.cs" />
     <Compile Include="ViewModelLocator.cs" />
