@@ -157,6 +157,8 @@
     <Compile Include="Enums\Feature.cs" />
     <Compile Include="Enums\Flair.cs" />
     <Compile Include="Enums\ServerError.cs" />
+    <Compile Include="Models\Browser\Firefox\Cookie.cs" />
+    <Compile Include="Models\Browser\Firefox\OriginAttributes.cs" />
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Socket\OnConnect.cs" />
@@ -170,6 +172,7 @@
     <Compile Include="Repositories\Interfaces\ISettingsRepository.cs" />
     <Compile Include="Repositories\SettingsRepository.cs" />
     <Compile Include="Services\ChatService.cs" />
+    <Compile Include="Services\CookieFinderService.cs" />
     <Compile Include="Services\Interfaces\IChatService.cs" />
     <Compile Include="Services\Interfaces\ICookieFinderService.cs" />
     <Compile Include="ViewModelLocator.cs" />
