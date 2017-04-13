@@ -140,9 +140,12 @@
     <Compile Include="Models\Socket\Response.cs" />
     <Compile Include="Models\Socket\SendMessage.cs" />
     <Compile Include="Models\UserData.cs" />
+    <Compile Include="Repositories\EmoteRepository.cs" />
+    <Compile Include="Repositories\FlairRepository.cs" />
     <Compile Include="Repositories\Interfaces\IEmoteRepository.cs" />
     <Compile Include="Repositories\Interfaces\IFlairRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISettingsRepository.cs" />
+    <Compile Include="Repositories\SettingsRepository.cs" />
     <Compile Include="Services\Interfaces\IChatService.cs" />
     <Compile Include="Services\Interfaces\ICookieFinderService.cs" />
     <Compile Include="ViewModelLocator.cs" />
