@@ -1,4 +1,6 @@
-﻿using destiny_chat_client.Enums;
+﻿using System.Linq;
+using destiny_chat_client.Classes;
+using destiny_chat_client.Enums;
 using destiny_chat_client.Models.Socket;
 using Newtonsoft.Json;
 using WebSocketSharp;
@@ -18,7 +20,9 @@ namespace destiny_chat_client.Models
 
         public Data(string content) => _content = content;
 
-        public Data(MessageEventArgs dataMessage) : this(dataMessage.Data) { }
+        public Data(MessageEventArgs dataMessage) : this(dataMessage.Data)
+        {
+        }
 
         public Data(Message message)
         {
@@ -69,13 +73,11 @@ namespace destiny_chat_client.Models
                 if (!IsError)
                     return ServerError.None;
 
-                switch (_content.Substring(4).Replace("\"", ""))
-                {
-                    case "needlogin":
-                        return ServerError.NeedLogin;
-                    default:
-                        return ServerError.None;
-                }
+                var text = _content.Substring(4).Replace("\"", "");
+
+                return Extensions
+                    .GetValues<ServerError>()
+                    .First(error => error.ToString().Equals(text));
             }
         }
     }
