@@ -2,6 +2,9 @@
 
 A re-implementation of the [destiny.gg integrated chat](https://www.destiny.gg/bigscreen) websocket front-end client using windows native controls as a stand-alone executable. This is mostly an exercise in using the controls, personal use, and for fun.
 
+**How to login:**  
+Only tested successfully on **Firefox**, there are a few tricks to how your browser will finally store your cookies. Sometimes it holds them in a session and keeps them there before successfully writing them, sometimes it's in some sort of cache location. The best bet would be to go to [the chatroom](https://www.destiny.gg/bigscreen), and then while it's open you open the program and attempt to sign in.
+
 **Full-Disclosure on Privacy**:     
 I don't have an official endpoint for logging in and generating a token, so I search for the user's stored cookies for 'sid' and 'rememberme' key values. [This is the code that I do that in](destiny-chat-client/Services/CookieFinderService.cs). This information is **stored for later use in plain text** in the user settings stored at *%UserProfile%/appdata/local/destiny_chat_client/settings.json*. **This information is your login to the chat and should not be shared.**  
 
