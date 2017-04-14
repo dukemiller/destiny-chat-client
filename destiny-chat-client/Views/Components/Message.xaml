@@ -22,7 +22,7 @@
                     <DataTrigger Binding="{Binding Dimmed}" Value="True">
                         <Setter Property="Opacity" Value="0.4" />
                     </DataTrigger>
-                    <DataTrigger Binding="{Binding Highlighted}" Value="True">
+                    <DataTrigger Binding="{Binding Mention}" Value="True">
                         <Setter Property="Background" Value="#153045" />
                     </DataTrigger>
                 </Style.Triggers>
