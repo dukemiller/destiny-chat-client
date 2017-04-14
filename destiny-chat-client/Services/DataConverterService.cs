@@ -387,23 +387,27 @@ namespace destiny_chat_client.Services
             return binding;
         }
 
-        private static readonly Binding TimeStampVisible = new Binding
+        private static Binding _timeStampVisible;
+
+        private static Binding TimeStampVisible => _timeStampVisible ?? (_timeStampVisible = new Binding
         {
             Source = _settingsRepository,
             Path = new PropertyPath("ShowTimestamp"),
             Converter = new TimestampFontConverter(),
             Mode = BindingMode.TwoWay,
             UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-        };
+        });
 
-        private static readonly Binding ShowFlair = new Binding
+        private static Binding _showFlair;
+
+        private static Binding ShowFlair => _showFlair ?? (_showFlair = new Binding
         {
             Source = _settingsRepository,
             Path = new PropertyPath("ShowFlair"),
             Converter = new BoolVisibilityConverter(),
             Mode = BindingMode.TwoWay,
             UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-        };
+        });
     }
 
     internal static class Styling
