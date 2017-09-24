@@ -9,6 +9,7 @@
              xmlns:viewModels="clr-namespace:destiny_chat_client.ViewModels"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
+             Background="#111111"
              TextElement.FontSize="16"
              TextElement.FontWeight="Regular"
              TextOptions.TextFormattingMode="Ideal"
@@ -19,7 +20,7 @@
             <Setter Property="Foreground" Value="White" />
         </Style>
     </UserControl.Resources>
-    <DockPanel Background="#181818" Opacity="0.9">
+    <DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <Border DockPanel.Dock="Top" Background="#424242" Padding="8">
                 <DockPanel>
@@ -37,7 +38,7 @@
                 </DockPanel>
             </Border>
         </DockPanel>
-        <StackPanel Margin="4" Background="#181818">
+        <StackPanel Margin="4" >
             <DockPanel>
                 <Label Content="Websocket ID: "
                        DockPanel.Dock="Left"

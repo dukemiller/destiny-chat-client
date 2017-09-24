@@ -11,11 +11,24 @@
              TextElement.FontWeight="Regular"
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
+             Background="#111111"
              Width="320"
              mc:Ignorable="d">
     <UserControl.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
-            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Foreground" Value="#999999" />
+        </Style>
+        <Style TargetType="Separator" x:Key="InvisibleSeparator">
+            <Setter Property="Height" Value="3" />
+            <Setter Property="Margin" Value="0, 10" />
+            <Setter Property="Opacity" Value="0" />
+        </Style>
+        <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}" x:Key="Header">
+            <Setter Property="Foreground" Value="DarkSlateGray" />
+            <Setter Property="Opacity" Value="0.6" />
+            <Setter Property="Margin" Value="-5,0" />
+            <Setter Property="FontFamily" Value="Roboto" />
+            <Setter Property="FontWeight" Value="SemiBold" />
         </Style>
         <ControlTemplate x:Key="CheckBoxControlTemplate1" TargetType="{x:Type CheckBox}">
             <ControlTemplate.Resources>
@@ -157,9 +170,9 @@
             <Setter Property="Template" Value="{StaticResource CheckBoxControlTemplate1}" />
         </Style>
     </UserControl.Resources>
-    <DockPanel Background="#181818" Opacity="0.9">
+    <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-            <Border DockPanel.Dock="Top" Background="#424242" Padding="8">
+            <Border DockPanel.Dock="Top" Background="#333333" Padding="8">
                 <DockPanel>
                     <materialDesign:Card Background="#424242" DockPanel.Dock="Right" Width="20"
                                          VerticalAlignment="Center">
@@ -171,12 +184,11 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </materialDesign:Card>
-                    <TextBlock Foreground="White">Settings</TextBlock>
+                    <TextBlock Foreground="White" FontFamily="Roboto">Settings</TextBlock>
                 </DockPanel>
             </Border>
         </DockPanel>
-        <StackPanel Margin="4" Background="#181818">
-
+        <StackPanel Margin="16" >
             <Button
                 Command="{Binding ShowLoginCommand}"
                 Style="{StaticResource MaterialDesignFlatButton}"
@@ -184,43 +196,49 @@
 
             <Separator Height="3" Margin="0, 5" />
 
-            <Label Foreground="DarkSlateGray" FontStyle="Italic">Chat:</Label>
+            <Label Style="{StaticResource Header}">Messages</Label>
             <CheckBox IsChecked="{Binding SettingsRepository.ShowFlair}">
-                <Label ToolTip="Show flair icons before usernames." Margin="-5,-2,0,0">Show flair icons</Label>
+                <Label ToolTip="Show flair icons before usernames." Margin="0,-2,0,0">Show flairs</Label>
             </CheckBox>
             <CheckBox IsChecked="{Binding SettingsRepository.ShowTimestamp}">
-                <Label ToolTip="Show the timestamp of posts before usernames." Margin="-5,-2,0,0">Show timestamp on messages</Label>
+                <Label ToolTip="Show the timestamp of posts before usernames." Margin="0,-2,0,0">Show time</Label>
             </CheckBox>
             <Label>Custom highlight words:</Label>
-            <TextBox Foreground="White" Margin="5, 0" Background="#202020" Text="{Binding SettingsRepository.HighlightWords, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Foreground="White" Margin="5, 0" Background="#202020"
+                     Text="{Binding SettingsRepository.HighlightWords, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Separator Height="3" Margin="0, 5" />
+            <Separator Style="{StaticResource InvisibleSeparator}" />
 
-            <Label Foreground="DarkSlateGray" FontStyle="Italic">On mention:</Label>
+            <Label Style="{StaticResource Header}">Notifications</Label>
             <CheckBox IsChecked="{Binding SettingsRepository.FlashOnMention}">
-                <Label ToolTip="Flash the icon on the bar a few times." Margin="-5,-2,0,0">Flash icon</Label>
+                <Label ToolTip="Flash the icon on the bar a few times." Margin="0,-2,0,0">Flash icon</Label>
             </CheckBox>
             <CheckBox IsChecked="{Binding SettingsRepository.SoundOnMention}" BorderThickness="2">
-                <Label ToolTip="Play a notification noise." Margin="-5,-2,0,0">Play sound</Label>
+                <Label ToolTip="Play a notification noise." Margin="0,-2,0,0">Play sound</Label>
             </CheckBox>
             <!--<CheckBox IsChecked="{Binding SettingsRepository.ToastOnMention}" BorderThickness="2">
                 <Label Margin="-5,-2,0,0">Toast</Label>
             </CheckBox>-->
 
-            <Separator Height="3" Margin="0, 5" />
+            <Separator Style="{StaticResource InvisibleSeparator}" />
 
-            <Label Foreground="DarkSlateGray" FontStyle="Italic">Tray:</Label>
+            <Label Style="{StaticResource Header}">Tray</Label>
             <CheckBox IsChecked="{Binding SettingsRepository.ExitToTray}">
-                <Label ToolTip="On closing, instead of ending the process minimize and enable the tray icon." Margin="-5,-2,0,0">Exit to tray</Label>
+                <Label ToolTip="On closing, instead of ending the process minimize and enable the tray icon."
+                       Margin="0,-2,0,0">
+                    Exit to tray
+                </Label>
             </CheckBox>
             <CheckBox IsChecked="{Binding SettingsRepository.MinimizeToTray}">
-                <Label ToolTip="On minimizing, instead of going on the start bar, hide the window and enable the tray icon." Margin="-5,-2,0,0">Minimize to tray</Label>
+                <Label
+                    ToolTip="On minimizing, instead of going on the start bar, hide the window and enable the tray icon."
+                    Margin="0,-2,0,0">
+                    Minimize to tray
+                </Label>
             </CheckBox>
             <CheckBox IsChecked="{Binding SettingsRepository.TrayAlwaysOpen}">
-                <Label ToolTip="Always have the tray icon no matter what" Margin="-5,-2,0,0">Always keep tray open</Label>
+                <Label ToolTip="Always have the tray icon no matter what" Margin="0,-2,0,0">Always keep tray open</Label>
             </CheckBox>
-
-            <Separator Height="3" Margin="0, 5" />
         </StackPanel>
     </DockPanel>
 </UserControl>
