@@ -25,7 +25,8 @@
             <i:InvokeCommandAction Command="{Binding TrayCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <materialDesign:DialogHost CloseOnClickAway="True" IsOpen="{Binding IsShowingPopup}"
+    <materialDesign:DialogHost CloseOnClickAway="True" 
+                               IsOpen="{Binding IsShowingPopup}"
                                DialogContent="{Binding PopupView}">
         <materialDesign:DialogHost.InputBindings>
             <KeyBinding Key="Escape" Command="{Binding ClosePopupCommand}" />

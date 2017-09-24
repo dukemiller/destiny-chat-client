@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:classes="clr-namespace:destiny_chat_client.Classes"
              xmlns:components="clr-namespace:destiny_chat_client.Views.Components"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              d:DesignWidth="350"
              d:DesignHeight="500"

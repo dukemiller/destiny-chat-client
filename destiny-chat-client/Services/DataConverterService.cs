@@ -40,7 +40,7 @@ namespace destiny_chat_client.Services
 
         private static readonly ChatViewModel ChatViewModel = SimpleIoc.Default.GetInstance<ChatViewModel>();
 
-        private static MainWindow MainWindow => (MainWindow)Application.Current.MainWindow;
+        private static MainWindow MainWindow => (MainWindow) Application.Current.MainWindow;
 
         private readonly FlashWindowHelper _helper;
 
@@ -78,10 +78,10 @@ namespace destiny_chat_client.Services
             // ## COMPONENT 2 & 3: flair and username
             // Squash username if the last message is from the same person, also dont show flair
             if (LastMessage != null
-                && ((Message)LastMessage.DataContext).Username.Equals(message.Username))
+                && ((Message) LastMessage.DataContext).Username.Equals(message.Username))
             {
-                paragraph.Inlines.Add(new Run(">") { Foreground = Brushes.DarkSlateGray });
-                paragraph.Inlines.Add(new Run(" ") { Foreground = Brushes.White });
+                paragraph.Inlines.Add(new Run(">") {Foreground = Brushes.DarkSlateGray});
+                paragraph.Inlines.Add(new Run(" ") {Foreground = Brushes.White});
             }
 
             else
@@ -89,7 +89,7 @@ namespace destiny_chat_client.Services
                 foreach (var flair in Flair(message))
                     paragraph.Inlines.Add(flair);
                 paragraph.Inlines.Add(Username(message));
-                paragraph.Inlines.Add(new Run(": ") { Foreground = Brushes.White });
+                paragraph.Inlines.Add(new Run(": ") {Foreground = Brushes.White});
             }
             // ##
 
@@ -129,7 +129,7 @@ namespace destiny_chat_client.Services
 
             var timestamp = new Run($"{date:t}  ")
             {
-                Foreground = new SolidColorBrush { Color = Colors.DimGray },
+                Foreground = new SolidColorBrush {Color = Colors.DimGray},
                 ToolTip = date.ToString("R"),
                 Tag = "Timestamp"
             };
@@ -153,7 +153,7 @@ namespace destiny_chat_client.Services
             if (flairs.Count(flair => flair.ToString().StartsWith("subscriber")) > 1)
                 foreach (var flair in flairs.GroupBy(flair => flair.ToString().StartsWith("subscriber"))
                     .First(group => group.Key)
-                    .OrderByDescending(flair => (int)flair)
+                    .OrderByDescending(flair => (int) flair)
                     .Skip(1))
                     flairs.Remove(flair);
 
@@ -213,7 +213,7 @@ namespace destiny_chat_client.Services
 
             return hyperlink;
         }
-
+        
         private static Inline Message(Message model)
         {
             var tokenized = new Queue<(Token Token, string Word)>(
@@ -224,7 +224,7 @@ namespace destiny_chat_client.Services
 
             var builder = new StringBuilder();
             var token = Token.None;
-            var span = new Span { Tag = "Message" };
+            var span = new Span {Tag = "Message"};
 
             while (tokenized.Count > 0)
             {
@@ -310,7 +310,8 @@ namespace destiny_chat_client.Services
             return run;
         }
 
-        private static void TextMouseDown(object sender, MouseButtonEventArgs args) => ChatViewModel.RemoveHighlightCommand.Execute(null);
+        private static void TextMouseDown(object sender, MouseButtonEventArgs args) => ChatViewModel
+            .RemoveHighlightCommand.Execute(null);
 
         private static Inline Emoticon(string text)
         {
@@ -325,16 +326,16 @@ namespace destiny_chat_client.Services
                 Height = 30, //bitmap.Height,
                 Width = 30 //bitmap.Width
             };
-            return new InlineUIContainer(image) { BaselineAlignment = BaselineAlignment.Center };
+            return new InlineUIContainer(image) {BaselineAlignment = BaselineAlignment.Center};
         }
 
         private static Inline Hyperlink(string text)
         {
-            var run = new Run(text) { Foreground = Styling.HyperlinkUnfocusedColor };
+            var run = new Run(text) {Foreground = Styling.HyperlinkUnfocusedColor};
             run.MouseEnter += (sender, args) => run.Foreground = Styling.HyperlinkFocusedColor;
             run.MouseLeave += (sender, args) => run.Foreground = Styling.HyperlinkUnfocusedColor;
             run.MouseDown += (sender, args) => Process.Start(text);
-            var hyperlink = new Hyperlink(run) { TextDecorations = null };
+            var hyperlink = new Hyperlink(run) {TextDecorations = null};
             return hyperlink;
         }
 
@@ -344,7 +345,7 @@ namespace destiny_chat_client.Services
             if (text.Equals(_settingsRepository.Username))
                 model.Mention = true;
 
-            var run = new Run(text) { Foreground = Styling.TextColor };
+            var run = new Run(text) {Foreground = Styling.TextColor};
 
             BindingOperations.SetBinding(run, TextElement.ForegroundProperty, Highlighted(model));
             run.MouseEnter += (sender, args) => run.TextDecorations = Styling.Underline;
@@ -368,7 +369,7 @@ namespace destiny_chat_client.Services
                 Width = 20 //bitmap.Width
             };
             BindingOperations.SetBinding(image, UIElement.VisibilityProperty, ShowFlair);
-            return new InlineUIContainer(image) { BaselineAlignment = BaselineAlignment.Center };
+            return new InlineUIContainer(image) {BaselineAlignment = BaselineAlignment.Center};
         }
 
         // Bindings
@@ -421,17 +422,19 @@ namespace destiny_chat_client.Services
 
         // 
 
-        public static readonly SolidColorBrush UsernameDefault = (SolidColorBrush)new BrushConverter().ConvertFrom("#CACACA");
+        public static readonly SolidColorBrush UsernameDefault =
+            (SolidColorBrush) new BrushConverter().ConvertFrom("#CACACA");
 
-        public static readonly SolidColorBrush UsernameAdmin = (SolidColorBrush)new BrushConverter().ConvertFrom("#B91010");
+        public static readonly SolidColorBrush UsernameAdmin =
+            (SolidColorBrush) new BrushConverter().ConvertFrom("#B91010");
 
         public static readonly SolidColorBrush UsernameBot = Brushes.YellowGreen;
 
         public static readonly SolidColorBrush UsernameT4 =
-            (SolidColorBrush)new BrushConverter().ConvertFrom("#A427D6");
+            (SolidColorBrush) new BrushConverter().ConvertFrom("#A427D6");
 
         public static readonly SolidColorBrush UsernameT3 =
-            (SolidColorBrush)new BrushConverter().ConvertFrom("#0060FF");
+            (SolidColorBrush) new BrushConverter().ConvertFrom("#0060FF");
 
         public static readonly SolidColorBrush UsernameT2 = Brushes.SlateBlue;
 
@@ -442,12 +445,12 @@ namespace destiny_chat_client.Services
         // public static readonly SolidColorBrush Text
 
         public static readonly SolidColorBrush TextColor =
-            (SolidColorBrush)new BrushConverter().ConvertFrom("#759999");
+            (SolidColorBrush) new BrushConverter().ConvertFrom("#759999");
 
         public static readonly SolidColorBrush HyperlinkUnfocusedColor =
-            (SolidColorBrush)new BrushConverter().ConvertFrom("#03C2FF");
+            (SolidColorBrush) new BrushConverter().ConvertFrom("#03C2FF");
 
         public static readonly SolidColorBrush HyperlinkFocusedColor =
-            (SolidColorBrush)new BrushConverter().ConvertFrom("#0088CC");
+            (SolidColorBrush) new BrushConverter().ConvertFrom("#0088CC");
     }
 }
