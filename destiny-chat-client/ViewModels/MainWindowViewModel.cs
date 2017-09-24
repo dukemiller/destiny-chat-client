@@ -108,7 +108,11 @@ namespace destiny_chat_client.ViewModels
                 IsShowingLogin = true;
             });
 
-            UseEmoteCommand = new RelayCommand<Emote>(emote => Message += emote.Description() + " ");
+            UseEmoteCommand = new RelayCommand<Emote>(emote =>
+            {
+                if (_settingsRepository.LoggedIn)
+                    Message += emote.Description() + " ";
+            });
 
             RetrieveDetailsCommand = new RelayCommand(() => ChatService.FindDetails());
             TrayCommand = new RelayCommand(() => new Tray(SimpleIoc.Default.GetInstance<ISettingsRepository>()));
