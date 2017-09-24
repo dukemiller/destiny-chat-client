@@ -185,7 +185,11 @@ namespace destiny_chat_client.Views.Components
                 {
                     var container = navigator.Parent as InlineUIContainer;
                     if (container?.Child is Image img)
-                        buffer.Append(((string)img.Tag).Split('~')[1]);
+                    {
+                        var tag = (string) img.Tag;
+                        if (tag.Contains("~"))
+                            buffer.Append(tag.Split('~')[1]);
+                    }
                 }
 
                 navigator = navigator.GetNextContextPosition(LogicalDirection.Forward);
