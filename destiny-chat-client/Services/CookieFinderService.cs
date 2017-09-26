@@ -65,19 +65,12 @@ namespace destiny_chat_client.Services
 
             if (browser.Contains("firefox"))
             {
-                var profile = await FirefoxProfileRecovery();
                 var cookies = await FirefoxCookiesSqlite();
 
-                if (profile.sid.Length > 0)
-                    sid = profile.sid;
-
-                else if (cookies.sid.Length > 0)
+                if (cookies.sid.Length > 0)
                     sid = cookies.sid;
 
-                if (profile.rememberme.Length > 0)
-                    rememberme = profile.rememberme;
-
-                else if (cookies.rememberme.Length > 0)
+                if (cookies.rememberme.Length > 0)
                     rememberme = cookies.rememberme;
             }
 
@@ -158,38 +151,7 @@ namespace destiny_chat_client.Services
 
             return (sid, rememberme);
         }
-
-        private static async Task<(string sid, string rememberme)> FirefoxProfileRecovery()
-        {
-            // Details
-            var sid = "";
-            var rememberme = "";
-            var path = Path.Combine(FirefoxProfile, "sessionstore-backups", "recovery.js");
-            const string startStr = "\"cookies\":[";
-            const string endStr = "],\"selectedWindow\"";
-
-            using (var streamreader = new StreamReader(path))
-            {
-                // Getting relevant lines
-                var lines = await streamreader.ReadToEndAsync();
-                var start = lines.IndexOf(startStr, StringComparison.Ordinal) + startStr.Length - 1;
-                var end = lines.Substring(start).IndexOf(endStr, StringComparison.Ordinal);
-                var json = lines.Substring(start, end - 1);
-
-                // Conversion
-                var firefoxCookies = JsonConvert.DeserializeObject<List<Cookie>>(json);
-
-                // Parsing
-                foreach (var cookie in firefoxCookies)
-                    if (cookie.Name.ToLower().Equals("rememberme"))
-                        rememberme = cookie.Value;
-                    else if (cookie.Name.ToLower().Equals("sid"))
-                        sid = cookie.Value;
-            }
-
-            return (sid, rememberme);
-        }
-
+        
         // 
 
         // http://stackoverflow.com/questions/22532870/encrypted-cookies-in-chrome
