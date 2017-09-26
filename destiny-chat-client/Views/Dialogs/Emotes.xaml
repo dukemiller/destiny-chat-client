@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:components="clr-namespace:destiny_chat_client.Views.Components"
              mc:Ignorable="d"
              Background="#111111"
              TextElement.FontSize="16"
@@ -13,17 +14,10 @@
              Name="EmoteWindow"
              DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
     <DockPanel Height="500" Width="400">
-        <Border DockPanel.Dock="Top" Background="#424242" Padding="8">
+        <Border DockPanel.Dock="Top" Background="#333333" Padding="8">
             <DockPanel>
-                <materialDesign:Card Background="#424242" DockPanel.Dock="Right" Width="20"  VerticalAlignment="Center" >
-                    <Label Content="X" FontSize="12" Padding="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseDown">
-                            <i:InvokeCommandAction Command="{Binding ClosePopupCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </materialDesign:Card>
-                <TextBlock Foreground="White">Emotes</TextBlock>
+                <components:ClosePopupButton DockPanel.Dock="Right" />
+                <TextBlock VerticalAlignment="Center" Foreground="#96938D">Emotes</TextBlock>
             </DockPanel>
         </Border>
         <ListView BorderThickness="0" ItemsSource="{Binding EmoteRepository.Emotes}" >

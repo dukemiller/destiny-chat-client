@@ -121,6 +121,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Components\ClosePopupButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Components\ComboMessage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -202,6 +206,9 @@
     </Compile>
     <Compile Include="Views\Components\ChatBar.xaml.cs">
       <DependentUpon>ChatBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\ClosePopupButton.xaml.cs">
+      <DependentUpon>ClosePopupButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\ComboMessage.xaml.cs">
       <DependentUpon>ComboMessage.xaml</DependentUpon>
