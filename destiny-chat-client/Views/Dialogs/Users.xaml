@@ -7,10 +7,10 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              Name="SettingsWindow"
-             Background="Transparent"
              TextElement.FontSize="16"
              TextElement.FontWeight="Regular"
              TextOptions.TextFormattingMode="Ideal"
+             Background="#181818"
              DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
     <DockPanel Background="#181818" Opacity="0.9" Height="500" Width="300">
         <DockPanel DockPanel.Dock="Top">
@@ -28,7 +28,7 @@
                 </DockPanel>
             </Border>
         </DockPanel>
-        <ListView BorderThickness="0" ItemsSource="{Binding ChatService.OrderedUsers}" Background="#181818">
+        <ListBox BorderThickness="0" ItemsSource="{Binding ChatService.OrderedUsers}" >
             <ListBox.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
@@ -48,11 +48,11 @@
                     </Setter>
                 </Style>
             </ListBox.ItemContainerStyle>
-            <ListView.ItemTemplate>
+            <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Label Foreground="White" Content="{Binding Username}" />
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </DockPanel>
 </UserControl>
