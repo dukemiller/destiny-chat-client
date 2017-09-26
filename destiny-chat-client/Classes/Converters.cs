@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using destiny_chat_client.Enums;
 using destiny_chat_client.Repositories.Interfaces;
+using destiny_chat_client.Services;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace destiny_chat_client.Classes
@@ -86,6 +88,19 @@ namespace destiny_chat_client.Classes
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => System.Convert
                                                                                                                .ToInt32(value) >= 10.0;
+    }
+
+    public class FeatureToColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return DataConverterService.GetForegroundForUsername(value as List<Feature>);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

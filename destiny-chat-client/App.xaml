@@ -22,6 +22,7 @@
             <classes:BoolStringConverter x:Key="BoolStringConverter" />
             <classes:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
             <classes:EmoteConverter x:Key="EmoteConverter" />
+            <classes:FeatureToColorConverter x:Key="FeatureToColorConverter" />
 
         </ResourceDictionary>
     </Application.Resources>
