@@ -50,6 +50,9 @@ namespace destiny_chat_client.Services
 
         public ObservableCollection<UserData> OrderedUsers => new ObservableCollection<UserData>(Users
             .OrderByDescending(user => user.Features.Contains(Feature.Admin))
+            .ThenByDescending(user => new[] {Feature.Vip, Feature.Broadcaster}
+                .Any(feature => user.Features.Contains(feature)))
+            .ThenByDescending(user => user.Features.Count > 0)
             .ThenBy(user => user.Username)
         );
 

@@ -5,14 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:classes="clr-namespace:destiny_chat_client.Classes"
              mc:Ignorable="d"
              Name="SettingsWindow"
              TextElement.FontSize="16"
              TextElement.FontWeight="Regular"
              TextOptions.TextFormattingMode="Ideal"
-             Background="#181818"
+             Background="#111111"
              DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
-    <DockPanel Background="#181818" Opacity="0.9" Height="500" Width="300">
+    <DockPanel Background="#181818" Height="500" Width="300">
         <DockPanel DockPanel.Dock="Top">
             <Border DockPanel.Dock="Top" Background="#424242" Padding="8">
                 <DockPanel>
@@ -28,7 +29,7 @@
                 </DockPanel>
             </Border>
         </DockPanel>
-        <ListBox BorderThickness="0" ItemsSource="{Binding ChatService.OrderedUsers}" >
+        <ListBox BorderThickness="0" VirtualizingPanel.ScrollUnit="Pixel" ItemsSource="{Binding ChatService.OrderedUsers}" Margin="24" >
             <ListBox.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
@@ -48,9 +49,14 @@
                     </Setter>
                 </Style>
             </ListBox.ItemContainerStyle>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel classes:PixelBasedScrollingBehavior.IsEnabled="True" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Foreground="White" Content="{Binding Username}" />
+                    <Label Margin="-3" Foreground="{Binding Features, Converter={StaticResource FeatureToColorConverter}}" Content="{Binding Username}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
