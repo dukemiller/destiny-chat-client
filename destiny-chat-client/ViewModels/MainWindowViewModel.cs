@@ -21,6 +21,8 @@ namespace destiny_chat_client.ViewModels
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "destiny_chat_client");
 
+        public static bool AutoCorrecting;
+
         // Fields
 
         private ISettingsRepository _settingsRepository;
@@ -277,43 +279,9 @@ namespace destiny_chat_client.ViewModels
             else Message = _commandHistory[++_commandHistoryIndex];
         }
 
-        private void AutoComplete()
+        private async void AutoComplete()
         {
-            // I need some more weighting for active users
-            if (Message?.Trim().Length > 0)
-            {
-                var sentence = Message.Split(' ').ToList();
-
-                var word = sentence.Last();
-
-                sentence.RemoveAt(sentence.Count - 1);
-
-                var names = _chatViewModel.ActiveUsers.Where(user => user.ToLower().StartsWith(word.ToLower()))
-                    .ToList();
-
-                // BAD
-                if (!names.Any())
-                    names = ChatService.Users
-                        .Where(user => user.Username.ToLower().StartsWith(word.ToLower()))
-                        .Select(user => user.Username)
-                        .ToList();
-
-                var emotes = EmoteRepository.Emotes
-                    .Where(e => e.ToString().ToLower().StartsWith(word.ToLower()))
-                    .Select(e => e.ToString());
-
-                var result = names.Concat(emotes)
-                    .OrderBy(thing => Distance.LevenshteinDistance(thing.ToLower(), word.ToLower()))
-                    .FirstOrDefault();
-
-                if (result != null)
-                {
-                    if (sentence.Count >= 1)
-                        Message = string.Join(" ", sentence) + " " + result;
-                    else
-                        Message = result + " ";
-                }
-            }
+            Message = await WordSuggestor.CorrectMessage(Message);
         }
 
         private async void Logout()

@@ -1,24 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using destiny_chat_client.Classes;
 
 namespace destiny_chat_client.Views.Components
 {
     /// <summary>
     /// Interaction logic for ChatBar.xaml
     /// </summary>
-    public partial class ChatBar : UserControl
+    public partial class ChatBar
     {
         public ChatBar()
         {
@@ -29,6 +20,9 @@ namespace destiny_chat_client.Views.Components
         {
             if (e.Key == Key.Tab)
                 e.Handled = true;
+
+            else if (WordSuggestor.Suggesting)
+                WordSuggestor.Suggesting = false;
         }
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)

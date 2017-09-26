@@ -157,6 +157,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\WordSuggestor.cs" />
     <Compile Include="Classes\Behaviors.cs" />
     <Compile Include="Classes\Converters.cs" />
     <Compile Include="Classes\Distance.cs" />
