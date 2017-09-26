@@ -166,35 +166,9 @@ namespace destiny_chat_client.Services
             {
                 FontWeight = FontWeights.SemiBold,
                 FontFamily = Styling.UsernameFont,
-                Foreground = Styling.UsernameDefault,
-                Tag = "Username"
+                Tag = "Username",
+                Foreground = GetForegroundForUsername(model.Features)
             };
-
-            // Changing foreground
-
-            var features = model.Features;
-
-            if (features.Contains(Feature.Admin))
-                run.Foreground = Styling.UsernameAdmin;
-
-            else if (features.Contains(Feature.Bot))
-                run.Foreground = Styling.UsernameBot;
-
-            else if (features.Contains(Feature.SubscriberT4))
-                run.Foreground = Styling.UsernameT4;
-
-            else if (features.Contains(Feature.SubscriberT3))
-                run.Foreground = Styling.UsernameT3;
-
-            else if (features.Contains(Feature.Subscriber))
-                run.Foreground = Styling.UsernameSubOrT1;
-
-            else if (features.Contains(Feature.SubscriberT2))
-                run.Foreground = Styling.UsernameT2;
-
-            else if (features.Contains(Feature.SubscriberT1)
-                     || features.Contains(Feature.SubscriberT0))
-                run.Foreground = Styling.UsernameSubOrT1;
 
             run.PreviewMouseDown += (sender, e) =>
             {
@@ -260,6 +234,39 @@ namespace destiny_chat_client.Services
             span.Inlines.Add(Text(model, builder.ToString()));
 
             return span;
+        }
+
+        public static Brush GetForegroundForUsername(List<Feature> features)
+        {
+            if (features.Contains(Feature.Admin))
+                return Styling.UsernameAdmin;
+
+            if (features.Contains(Feature.Bot))
+                return Styling.UsernameBot;
+
+            if (features.Contains(Feature.Vip))
+                return Styling.UsernameVip;
+
+            if (features.Contains(Feature.Broadcaster))
+                return Styling.UsernameBroadcaster;
+
+            if (features.Contains(Feature.SubscriberT4))
+                return Styling.UsernameT4;
+
+            if (features.Contains(Feature.SubscriberT3))
+                return Styling.UsernameT3;
+
+            if (features.Contains(Feature.Subscriber))
+                return Styling.UsernameSubOrT1;
+
+            if (features.Contains(Feature.SubscriberT2))
+                return Styling.UsernameT2;
+
+            if (features.Contains(Feature.SubscriberT1)
+                || features.Contains(Feature.SubscriberT0))
+                return Styling.UsernameSubOrT1;
+
+            return Styling.UsernameDefault;
         }
 
         // Parsing
@@ -382,7 +389,7 @@ namespace destiny_chat_client.Services
                 Path = new PropertyPath("Mention"),
                 Converter = new FontColorConverter(),
                 Mode = BindingMode.TwoWay,
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             };
 
             return binding;
@@ -396,7 +403,7 @@ namespace destiny_chat_client.Services
             Path = new PropertyPath("ShowTimestamp"),
             Converter = new TimestampFontConverter(),
             Mode = BindingMode.TwoWay,
-            UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+            UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
         });
 
         private static Binding _showFlair;
@@ -407,9 +414,8 @@ namespace destiny_chat_client.Services
             Path = new PropertyPath("ShowFlair"),
             Converter = new BoolVisibilityConverter(),
             Mode = BindingMode.TwoWay,
-            UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+            UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
         });
-    }
 
     internal static class Styling
     {
@@ -439,6 +445,14 @@ namespace destiny_chat_client.Services
         public static readonly SolidColorBrush UsernameT2 = Brushes.SlateBlue;
 
         public static readonly SolidColorBrush UsernameSubOrT1 = Brushes.CornflowerBlue;
+
+        public static readonly SolidColorBrush UsernameVip =
+            (SolidColorBrush)new BrushConverter().ConvertFrom("#4DB521");
+
+        public static readonly SolidColorBrush UsernameBroadcaster =
+            (SolidColorBrush)new BrushConverter().ConvertFrom("#00E5FF");
+
+
 
         // 
 
