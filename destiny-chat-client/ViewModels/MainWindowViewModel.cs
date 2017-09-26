@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 using destiny_chat_client.Classes;
 using destiny_chat_client.Enums;
 using destiny_chat_client.Repositories.Interfaces;
-using destiny_chat_client.Services;
 using destiny_chat_client.Services.Interfaces;
 using destiny_chat_client.Views.Dialogs;
 using GalaSoft.MvvmLight;
@@ -113,6 +112,8 @@ namespace destiny_chat_client.ViewModels
                 if (_settingsRepository.LoggedIn)
                     Message += emote.Description() + " ";
             });
+
+            OpenWebsiteCommand = new RelayCommand(() => Process.Start("https://www.destiny.gg/bigscreen"));
 
             RetrieveDetailsCommand = new RelayCommand(() => ChatService.FindDetails());
             TrayCommand = new RelayCommand(() => new Tray(SimpleIoc.Default.GetInstance<ISettingsRepository>()));
@@ -249,6 +250,8 @@ namespace destiny_chat_client.ViewModels
         public RelayCommand NextMessageCommand { get; set; }
 
         public RelayCommand EmotesCommand { get; set; }
+
+        public RelayCommand OpenWebsiteCommand { get; set; }
 
         public RelayCommand<Emote> UseEmoteCommand { get; set; }
 
