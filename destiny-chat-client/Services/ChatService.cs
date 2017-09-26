@@ -17,7 +17,7 @@ namespace destiny_chat_client.Services
 {
     public class ChatService : IChatService
     {
-        private const string InitUrl = "https://www.destiny.gg/chat/init";
+        private const string MeUrl = "https://www.destiny.gg/api/chat/me";
 
         private readonly ISettingsRepository _settingsRepository;
 
@@ -81,9 +81,13 @@ namespace destiny_chat_client.Services
         {
             var response = "";
 
-            var address = new Uri(InitUrl);
+            var address = new Uri(MeUrl);
             var cookies = new CookieContainer();
-            var handler = new HttpClientHandler { CookieContainer = cookies, };
+            var handler = new HttpClientHandler
+            {
+                CookieContainer = cookies,
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+            };
             var client = new HttpClient(handler) { BaseAddress = address };
 
             if (_settingsRepository.Sid.Length > 0)
@@ -92,8 +96,14 @@ namespace destiny_chat_client.Services
             if (_settingsRepository.RememberMe.Length > 0)
                 cookies.Add(address, new Cookie("rememberme", _settingsRepository.RememberMe));
 
+            client.DefaultRequestHeaders.Add("Host", "www.destiny.gg");
             client.DefaultRequestHeaders.Add("User-Agent", "destiny.gg windows client");
-
+            client.DefaultRequestHeaders.Add("Accept", "application/json, text/javascript, */*; q=0.01");
+            client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.5");
+            client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+            client.DefaultRequestHeaders.Add("DNT", "1");
+            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
+            
             // connection error
             try
             {
@@ -109,9 +119,6 @@ namespace destiny_chat_client.Services
                         .Split(';')[0];
 
                 response = await request.Content.ReadAsStringAsync();
-                response = response.Split(new[] { "\n" }, StringSplitOptions.None)[0];
-                response = response.Substring(response.IndexOf("new chat(", StringComparison.Ordinal) + 9);
-                response = response.Substring(0, response.Length - 2);
             }
 
             catch
@@ -120,13 +127,13 @@ namespace destiny_chat_client.Services
             }
 
             // wrong information error
-            if (!response.Contains("{\"user\":"))
+            if (!response.Contains("{\"nick\":"))
                 return (false, response);
 
             // deserialization error
             try
             {
-                return (true, JsonConvert.DeserializeObject<dynamic>(response).user.nick);
+                return (true, JsonConvert.DeserializeObject<dynamic>(response).nick);
             }
 
             catch

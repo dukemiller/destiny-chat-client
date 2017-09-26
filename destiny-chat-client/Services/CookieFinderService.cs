@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using destiny_chat_client.Models.Browser.Firefox;
 using destiny_chat_client.Services.Interfaces;
 using Microsoft.Win32;
-using Newtonsoft.Json;
 
 namespace destiny_chat_client.Services
 {
@@ -22,7 +19,7 @@ namespace destiny_chat_client.Services
         private static string FirefoxProfile => Directory.GetDirectories(FireFoxProfilePath)
             .OrderBy(dir => new FileInfo(dir).LastAccessTimeUtc)
             .FirstOrDefault();
-
+        
         private static readonly string ChromeProfile = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             "Google", "Chrome", "User Data", "Default");
