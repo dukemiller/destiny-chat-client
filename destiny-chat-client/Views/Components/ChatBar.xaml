@@ -20,7 +20,7 @@
         </Style>
     </UserControl.Resources>
     <DockPanel Margin="5, 5, 5, 0">
-        <DockPanel Margin="0, 5" DockPanel.Dock="Bottom" LastChildFill="False">
+        <DockPanel Margin="5, 5" DockPanel.Dock="Bottom" LastChildFill="False">
             <DockPanel DockPanel.Dock="Right" LastChildFill="False">
                 <materialDesign:PackIcon DockPanel.Dock="Right" Kind="Account" ToolTip="Look at list of viewers">
                     <i:Interaction.Triggers>
@@ -97,9 +97,6 @@
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Foreground" Value="White" />
                                 </Trigger>
-                                <DataTrigger Binding="{Binding }" Value="True">
-                                    <Setter Property="Foreground" Value="White" />
-                                </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </materialDesign:PackIcon.Resources>
