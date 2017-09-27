@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
@@ -18,6 +19,8 @@ namespace destiny_chat_client.Services
     public class ChatService : IChatService
     {
         private const string MeUrl = "https://www.destiny.gg/api/chat/me";
+
+        private const string HistoryUrl = "https://www.destiny.gg/api/chat/history";
 
         private readonly ISettingsRepository _settingsRepository;
 
@@ -58,13 +61,14 @@ namespace destiny_chat_client.Services
 
         // 
 
-        public void StartReceivingMessages()
+        public async void StartReceivingMessages()
         {
             if (MessageReceived == null || ErrorReceived == null)
                 throw new Exception("MessageReceived or ErrorReceived are unset.");
             _ws.OnOpen += OnOpen;
             _ws.OnError += OnError;
             _ws.OnMessage += OnMessage;
+            await FillHistory();
             _ws.Connect();
         }
 
@@ -83,33 +87,11 @@ namespace destiny_chat_client.Services
         public async Task<(bool successful, string username)> GetUsername()
         {
             var response = "";
-
-            var address = new Uri(MeUrl);
-            var cookies = new CookieContainer();
-            var handler = new HttpClientHandler
-            {
-                CookieContainer = cookies,
-                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-            };
-            var client = new HttpClient(handler) { BaseAddress = address };
-
-            if (_settingsRepository.Sid.Length > 0)
-                cookies.Add(address, new Cookie("sid", _settingsRepository.Sid));
-
-            if (_settingsRepository.RememberMe.Length > 0)
-                cookies.Add(address, new Cookie("rememberme", _settingsRepository.RememberMe));
-
-            client.DefaultRequestHeaders.Add("Host", "www.destiny.gg");
-            client.DefaultRequestHeaders.Add("User-Agent", "destiny.gg windows client");
-            client.DefaultRequestHeaders.Add("Accept", "application/json, text/javascript, */*; q=0.01");
-            client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.5");
-            client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
-            client.DefaultRequestHeaders.Add("DNT", "1");
-            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
             
             // connection error
             try
             {
+                var client = CreateAuthenticatedClient(MeUrl);
                 var request = await client.GetAsync("");
 
                 // Apparently you don't need your SID to login if you already created a rememberme token
@@ -167,6 +149,53 @@ namespace destiny_chat_client.Services
         }
 
         // 
+
+        private async Task FillHistory()
+        {
+            try
+            {
+                var client = CreateAuthenticatedClient(HistoryUrl);
+                var request = await client.GetAsync("");
+                var response = await request.Content.ReadAsStringAsync();
+                var messages = JsonConvert.DeserializeObject<List<string>>(response).Select(s => new Data(s));
+                foreach (var message in messages)
+                    Application.Current.Dispatcher.Invoke(() => { MessageReceived(message); });
+            }
+
+            // Doesn't really matter
+            catch
+            {
+                // ignored
+            }
+        }
+
+        private HttpClient CreateAuthenticatedClient(string url)
+        {
+            var address = new Uri(url);
+            var cookies = new CookieContainer();
+            var handler = new HttpClientHandler
+            {
+                CookieContainer = cookies,
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+            };
+            var client = new HttpClient(handler) { BaseAddress = address };
+
+            if (_settingsRepository.Sid.Length > 0)
+                cookies.Add(address, new Cookie("sid", _settingsRepository.Sid));
+
+            if (_settingsRepository.RememberMe.Length > 0)
+                cookies.Add(address, new Cookie("rememberme", _settingsRepository.RememberMe));
+
+            client.DefaultRequestHeaders.Add("Host", "www.destiny.gg");
+            client.DefaultRequestHeaders.Add("User-Agent", "destiny.gg windows client");
+            client.DefaultRequestHeaders.Add("Accept", "application/json, text/javascript, */*; q=0.01");
+            client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.5");
+            client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+            client.DefaultRequestHeaders.Add("DNT", "1");
+            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
+
+            return client;
+        }
 
         private static void OnOpen(object sender, EventArgs args) => Console.WriteLine(args);
 
