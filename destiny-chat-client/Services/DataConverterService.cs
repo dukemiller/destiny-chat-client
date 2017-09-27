@@ -44,6 +44,8 @@ namespace destiny_chat_client.Services
 
         private readonly FlashWindowHelper _helper;
 
+        public static bool? GreenText;
+
         // 
 
         public DataConverterService(ISettingsRepository settingsRepository,
@@ -190,11 +192,13 @@ namespace destiny_chat_client.Services
         
         private static Inline Message(Message model)
         {
-            var tokenized = new Queue<(Token Token, string Word)>(
-                model.Text.Trim()
-                    .Split(' ')
-                    .Select(word => new ValueTuple<Token, string>(TokenParse(word), word))
+            var tokenized = new Queue<TokenizedWord>(
+                model.Text.Trim().Split(' ').Select(word => new TokenizedWord(word))
             );
+
+            GreenText = tokenized
+                .FirstOrDefault(t => t.Token == Token.Text)?
+                .Word.TrimStart().StartsWith(">");
 
             var builder = new StringBuilder();
             var token = Token.None;
@@ -417,6 +421,20 @@ namespace destiny_chat_client.Services
             UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
         });
 
+        // 
+
+        internal class TokenizedWord
+        {
+            public TokenizedWord(string word)
+            {
+                Word = word;
+                Token = TokenParse(Word);
+            }
+            public string Word { get; }
+            public Token Token { get; }
+        }
+    }
+    
     internal static class Styling
     {
         public static readonly FontFamily UsernameFont = new FontFamily("Trebuchet MS");
@@ -451,9 +469,7 @@ namespace destiny_chat_client.Services
 
         public static readonly SolidColorBrush UsernameBroadcaster =
             (SolidColorBrush)new BrushConverter().ConvertFrom("#00E5FF");
-
-
-
+        
         // 
 
         // public static readonly SolidColorBrush Text

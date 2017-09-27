@@ -15,14 +15,19 @@ namespace destiny_chat_client.Classes
     {
         public static readonly SolidColorBrush White = new SolidColorBrush(Colors.White);
         public static readonly SolidColorBrush Foreground = (SolidColorBrush)new BrushConverter().ConvertFrom("#759999");
+        public static readonly SolidColorBrush GreenTextColor = (SolidColorBrush)new BrushConverter().ConvertFrom("#51A528");
     }
 
     public class FontColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => System.Convert
             .ToBoolean(value)
-            ? Styling.White
-            : Styling.Foreground;
+            ? (DataConverterService.GreenText == true 
+                ? Styling.GreenTextColor
+                : Styling.White)
+            : (DataConverterService.GreenText == true
+                ? Styling.GreenTextColor
+                : Styling.Foreground);
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => ((SolidColorBrush)value)?.Equals(new SolidColorBrush(Colors.White));
     }
