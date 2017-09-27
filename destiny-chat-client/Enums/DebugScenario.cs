@@ -9,6 +9,7 @@
         UserMentionOtherUsers,
         Links,
         Spam,
-        SuperSpam
+        SuperSpam,
+        GreenText
     }
 }

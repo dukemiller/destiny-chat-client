@@ -342,6 +342,18 @@ namespace destiny_chat_client.Services
                         break;
                     }
 
+                    case DebugScenario.GreenText:
+                    {
+                        MessageReceived(new Data(new Message
+                        {
+                            Username = $"username_{number++}",
+                            Text = ">" + RandomMessage(),
+                        }));
+
+                        await Task.Delay(1000);
+                        break;
+                    }
+
                     case DebugScenario.Silence:
                     default:
                     {
