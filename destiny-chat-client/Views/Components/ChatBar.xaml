@@ -125,7 +125,9 @@
         <Border BorderBrush="#222222" BorderThickness="2" CornerRadius="2">
             <TextBox materialDesign:HintAssist.Hint="{Binding ChatHint}"
                      materialDesign:HintAssist.HintOpacity="0.4"
+                     materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                      Padding="2,-1"
+                     BorderThickness="0"
                      Background="#111111"
                      Foreground="#759999"
                      MinHeight="50"
@@ -146,16 +148,6 @@
                     <KeyBinding Key="Up" Command="{Binding PreviousMessageCommand}" />
                     <KeyBinding Key="Down" Command="{Binding NextMessageCommand}" />
                 </TextBox.InputBindings>
-                <TextBox.Resources>
-                    <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
-                        <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
-                        <Style.Triggers>
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="TextBlock.TextDecorations" Value="None" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Resources>
             </TextBox>
         </Border>
     </DockPanel>
