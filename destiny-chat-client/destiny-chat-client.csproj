@@ -133,6 +133,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Components\WebButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Dialogs\Debug.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,6 +219,9 @@
     </Compile>
     <Compile Include="Views\Components\Message.xaml.cs">
       <DependentUpon>Message.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\WebButton.xaml.cs">
+      <DependentUpon>WebButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\Debug.xaml.cs">
       <DependentUpon>Debug.xaml</DependentUpon>

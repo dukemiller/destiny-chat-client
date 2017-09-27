@@ -6,19 +6,11 @@
              xmlns:viewModels="clr-namespace:destiny_chat_client.ViewModels"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:components="clr-namespace:destiny_chat_client.Views.Components"
              mc:Ignorable="d"
              Background="#080808"
              d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
              d:DesignWidth="480">
-    <UserControl.Resources>
-        <Style TargetType="materialDesign:PackIcon" x:Key="PackIconStyle">
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Width" Value="30" />
-            <Setter Property="Height" Value="30" />
-            <Setter Property="Background" Value="#080808" />
-        </Style>
-    </UserControl.Resources>
     <DockPanel Margin="5, 5, 5, 0">
         <DockPanel Margin="5, 5" DockPanel.Dock="Bottom" LastChildFill="False">
             <DockPanel DockPanel.Dock="Right" LastChildFill="False">
@@ -104,26 +96,33 @@
                         </Style>
                     </materialDesign:PackIcon.Resources>
                 </materialDesign:PackIcon>
-                <materialDesign:PackIcon Kind="OpenInNew" ToolTip="Open D.GG in Browser">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseUp">
-                            <i:InvokeCommandAction Command="{Binding OpenWebsiteCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <materialDesign:PackIcon.Resources>
-                        <Style TargetType="materialDesign:PackIcon" BasedOn="{StaticResource PackIconStyle}">
-                            <Setter Property="Foreground" Value="#414141" />
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="White" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </materialDesign:PackIcon.Resources>
-                </materialDesign:PackIcon>
+
+                <materialDesign:PopupBox PlacementMode="TopAndAlignCentres" ToolTip="Open in browser ...">
+                    <materialDesign:PopupBox.ToggleContent>
+                        <materialDesign:PackIcon Kind="OpenInNew">
+                            <materialDesign:PackIcon.Resources>
+                                <Style TargetType="materialDesign:PackIcon" BasedOn="{StaticResource PackIconStyle}">
+                                    <Setter Property="Foreground" Value="#414141" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="White" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </materialDesign:PackIcon.Resources>
+                        </materialDesign:PackIcon>
+                    </materialDesign:PopupBox.ToggleContent>
+                    <StackPanel>
+                        <components:WebButton Kind="Web" Tag="destiny" ToolTip="destiny.gg/bigscreen" />
+                        <components:WebButton Kind="Reddit" Tag="reddit" ToolTip="/r/Destiny" />
+                        <components:WebButton Kind="Twitter" Tag="twitter" ToolTip="@OmniDestiny" />
+                        <components:WebButton Kind="YoutubePlay" Tag="youtube" ToolTip="youtube.com/user/destiny" />
+                        <components:WebButton Kind="Twitch" Tag="twitch" ToolTip="twitch.tv/Destiny" />
+                    </StackPanel>
+                </materialDesign:PopupBox>
             </DockPanel>
         </DockPanel>
-        <Border BorderBrush="#222222"  BorderThickness="2" CornerRadius="2" >
+        <Border BorderBrush="#222222" BorderThickness="2" CornerRadius="2">
             <TextBox materialDesign:HintAssist.Hint="{Binding ChatHint}"
                      materialDesign:HintAssist.HintOpacity="0.4"
                      Padding="2,-1"

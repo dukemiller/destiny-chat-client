@@ -123,7 +123,27 @@ namespace destiny_chat_client.ViewModels
                     Message += emote.Description() + " ";
             });
 
-            OpenWebsiteCommand = new RelayCommand(() => Process.Start("https://www.destiny.gg/bigscreen"));
+            OpenWebsiteCommand = new RelayCommand<string>(name =>
+            {
+                switch (name)
+                {
+                    case "destiny":
+                        Process.Start("https://www.destiny.gg/bigscreen");
+                        break;
+                    case "twitter":
+                        Process.Start("https://twitter.com/omnidestiny?lang=en");
+                        break;
+                    case "reddit":
+                        Process.Start("https://www.reddit.com/r/Destiny/");
+                        break;
+                    case "youtube":
+                        Process.Start("https://www.youtube.com/user/destiny");
+                        break;
+                    case "twitch":
+                        Process.Start("https://www.twitch.tv/destiny");
+                        break;
+                }
+            });
 
             RetrieveDetailsCommand = new RelayCommand(() => ChatService.FindDetails(), () => !SettingsRepository.LoggedIn);
             TrayCommand = new RelayCommand(() => new Tray(SimpleIoc.Default.GetInstance<ISettingsRepository>()));
@@ -261,7 +281,7 @@ namespace destiny_chat_client.ViewModels
 
         public RelayCommand EmotesCommand { get; set; }
 
-        public RelayCommand OpenWebsiteCommand { get; set; }
+        public RelayCommand<string> OpenWebsiteCommand { get; set; }
 
         public RelayCommand<Emote> UseEmoteCommand { get; set; }
 
