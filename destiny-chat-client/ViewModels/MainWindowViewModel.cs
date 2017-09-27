@@ -249,7 +249,7 @@ namespace destiny_chat_client.ViewModels
             set => Set(() => PopupView, ref _popupView, value);
         }
 
-        public string ChatHint => LoggedIn ? "Enter a message..." : "Log in to type in chat.";
+        public string ChatHint => LoggedIn ? $"Write something {SettingsRepository.Username} ..." : "Log in to type in chat.";
 
         // Commands
 
