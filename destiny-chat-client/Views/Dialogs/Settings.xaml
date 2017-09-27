@@ -181,13 +181,6 @@
             </Border>
         </DockPanel>
         <StackPanel Margin="16" >
-            <Button
-                Command="{Binding ShowLoginCommand}"
-                Style="{StaticResource MaterialDesignFlatButton}"
-                Content="User/login settings" />
-
-            <Separator Height="3" Margin="0, 5" />
-
             <Label Style="{StaticResource Header}">Messages</Label>
             <CheckBox IsChecked="{Binding SettingsRepository.ShowFlair}">
                 <Label ToolTip="Show flair icons before usernames." Margin="0,-2,0,0">Show flairs</Label>

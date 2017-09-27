@@ -22,10 +22,10 @@
     <DockPanel Margin="5, 5, 5, 0">
         <DockPanel Margin="5, 5" DockPanel.Dock="Bottom" LastChildFill="False">
             <DockPanel DockPanel.Dock="Right" LastChildFill="False">
-                <materialDesign:PackIcon DockPanel.Dock="Right" Kind="Account" ToolTip="Look at list of viewers">
+                <materialDesign:PackIcon Kind="LoginVariant" ToolTip="Login settings">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseUp">
-                            <i:InvokeCommandAction Command="{Binding UserlistCommand}" />
+                            <i:InvokeCommandAction Command="{Binding ShowLoginCommand}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <materialDesign:PackIcon.Resources>
@@ -35,7 +35,7 @@
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Foreground" Value="White" />
                                 </Trigger>
-                                <DataTrigger Binding="{Binding IsShowingUserlist}" Value="True">
+                                <DataTrigger Binding="{Binding IsShowingLogin}" Value="True">
                                     <Setter Property="Foreground" Value="White" />
                                 </DataTrigger>
                             </Style.Triggers>
@@ -56,6 +56,26 @@
                                     <Setter Property="Foreground" Value="White" />
                                 </Trigger>
                                 <DataTrigger Binding="{Binding IsShowingSettings}" Value="True">
+                                    <Setter Property="Foreground" Value="White" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:PackIcon.Resources>
+                </materialDesign:PackIcon>
+                <materialDesign:PackIcon Kind="Account" ToolTip="Look at list of viewers">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding UserlistCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <materialDesign:PackIcon.Resources>
+                        <Style TargetType="materialDesign:PackIcon" BasedOn="{StaticResource PackIconStyle}">
+                            <Setter Property="Foreground" Value="#414141" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="White" />
+                                </Trigger>
+                                <DataTrigger Binding="{Binding IsShowingUserlist}" Value="True">
                                     <Setter Property="Foreground" Value="White" />
                                 </DataTrigger>
                             </Style.Triggers>

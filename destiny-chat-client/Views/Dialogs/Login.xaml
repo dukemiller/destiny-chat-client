@@ -18,7 +18,21 @@
              Width="320" d:DesignWidth="300">
     <UserControl.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
-            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Foreground" Value="#999999" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="Separator" x:Key="InvisibleSeparator">
+            <Setter Property="Height" Value="3" />
+            <Setter Property="Margin" Value="0, 10" />
+            <Setter Property="Opacity" Value="0" />
+        </Style>
+        <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}" x:Key="Header">
+            <Setter Property="Foreground" Value="DarkSlateGray" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Opacity" Value="0.6" />
+            <Setter Property="Margin" Value="-5,0" />
+            <Setter Property="FontFamily" Value="Roboto" />
+            <Setter Property="FontWeight" Value="SemiBold" />
         </Style>
     </UserControl.Resources>
     <DockPanel>
@@ -30,67 +44,72 @@
                 </DockPanel>
             </Border>
         </DockPanel>
-        <StackPanel Margin="4" >
+        <StackPanel Margin="16">
+            <Label Style="{StaticResource Header}">Login credentials</Label>
             <DockPanel>
-                <Label Content="Websocket ID: "
-                       DockPanel.Dock="Left"
-                       Style="{StaticResource {x:Type Label}}" />
-                <TextBox MinWidth="200"
-                         Foreground="White"
-                         Style="{StaticResource MaterialDesignTextBox}"
-                         Text="{Binding SettingsRepository.Sid, UpdateSourceTrigger=PropertyChanged}" />
-            </DockPanel>
-            <DockPanel>
-
-                <Label Content="Remember me key: "
-                       DockPanel.Dock="Left"
-                       Style="{StaticResource {x:Type Label}}" />
-                <TextBox MinWidth="200"
-                         Foreground="White"
-                         Style="{StaticResource MaterialDesignTextBox}"
-                         Text="{Binding SettingsRepository.RememberMe, UpdateSourceTrigger=PropertyChanged}" />
-            </DockPanel>
-            <DockPanel>
-                <Label Content="Username: "
-                       Opacity="0.6"
-                       DockPanel.Dock="Left"
-                       Style="{StaticResource {x:Type Label}}" />
-                <TextBox MinWidth="200"
-                         Opacity="0.6"
-                         IsReadOnly="True"
-                         Foreground="White"
-                         Style="{StaticResource MaterialDesignTextBox}"
-                         Text="{Binding SettingsRepository.Username, UpdateSourceTrigger=PropertyChanged}" />
-            </DockPanel>
-            <DockPanel>
-                <Label Content="Logged in: "
-                       Opacity="0.6"
-                       DockPanel.Dock="Left"
-                       Style="{StaticResource {x:Type Label}}" />
-                <TextBox MinWidth="200"
-                         Opacity="0.6"
-                         IsReadOnly="True"
-                         Foreground="White"
-                         Style="{StaticResource MaterialDesignTextBox}"
-                         Text="{Binding SettingsRepository.LoggedIn, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource BoolStringConverter}}" />
+                <UniformGrid Rows="2">
+                    <Label Content="Websocket ID: " />
+                    <Label Content="Remember me: " />
+                </UniformGrid>
+                <UniformGrid Rows="2">
+                    <TextBox MinWidth="200"
+                             Background="#202020"
+                             Foreground="White"
+                             Text="{Binding SettingsRepository.Sid, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox MinWidth="200"
+                             Background="#202020"
+                             Foreground="White"
+                             Text="{Binding SettingsRepository.RememberMe, UpdateSourceTrigger=PropertyChanged}" />
+                </UniformGrid>
             </DockPanel>
 
-            <Separator Height="3" Margin="0, 5" />
+            <Separator Style="{StaticResource InvisibleSeparator}" />
 
+            <Label Style="{StaticResource Header}">Status</Label>
+            <DockPanel>
+                <UniformGrid Rows="2">
+                    <Label Content="Username: "
+                           Opacity="0.6" />
 
+                    <Label Content="Logged in: "
+                           Opacity="0.6" />
+                </UniformGrid>
+                <UniformGrid Rows="2">
+                    <TextBlock MinWidth="200"
+                               Opacity="0.6"
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               Text="{Binding SettingsRepository.Username, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock MinWidth="200"
+                               Opacity="0.6"
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               Text="{Binding SettingsRepository.LoggedIn, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource BoolStringConverter}}" />
+                </UniformGrid>
+            </DockPanel>
+
+            <Separator Style="{StaticResource InvisibleSeparator}" />
+
+            <Label Style="{StaticResource Header}">Actions</Label>
             <Button Command="{Binding RetrieveDetailsCommand}"
                     Style="{StaticResource MaterialDesignFlatButton}"
-                    Content="Find sid/rememberme on disk" />
+                    FontWeight="UltraBold"
+                    HorizontalContentAlignment="Left"
+                    Content="Find login information on disk" />
 
             <Button
                 Command="{Binding LoginCommand}"
                 Style="{StaticResource MaterialDesignFlatButton}"
+                HorizontalContentAlignment="Left"
+                FontWeight="UltraBold"
                 Content="Attempt login" />
 
             <Button
                 Command="{Binding LogoutCommand}"
                 Style="{StaticResource MaterialDesignFlatButton}"
-                Content="Clear data" />
+                HorizontalContentAlignment="Left"
+                FontWeight="UltraBold"
+                Content="Logout / clear data" />
 
 
         </StackPanel>

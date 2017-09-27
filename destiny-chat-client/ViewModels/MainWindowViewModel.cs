@@ -66,12 +66,19 @@ namespace destiny_chat_client.ViewModels
             SettingsRepository.PropertyChanged += async (sender, args) =>
             {
                 await SettingsRepository.Save();
-                if (args.PropertyName.Equals("Sid") || args.PropertyName.Equals("RememberMe"))
+                if (args.PropertyName.Equals("Sid") || args.PropertyName.Equals("RememberMe") ||
+                    args.PropertyName == "LoggedIn")
+                {
                     LoginCommand.RaiseCanExecuteChanged();
+                    RetrieveDetailsCommand.RaiseCanExecuteChanged();
+                }
             };
 
             SendCommand = new RelayCommand(SendMessage);
-            LoginCommand = new RelayCommand(Login, () => SettingsRepository.Sid.Length > 0 || SettingsRepository.RememberMe.Length > 0);
+            LoginCommand = new RelayCommand(
+                Login, 
+                () => !SettingsRepository.LoggedIn && (SettingsRepository.Sid.Length > 0 || SettingsRepository.RememberMe.Length > 0)
+            );
             LogoutCommand = new RelayCommand(Logout);
             ClearCommand = new RelayCommand(() => Message = "");
 
@@ -107,6 +114,7 @@ namespace destiny_chat_client.ViewModels
                 PopupView = new Login();
                 IsShowingSettings = false;
                 IsShowingLogin = true;
+                IsShowingPopup = true;
             });
 
             UseEmoteCommand = new RelayCommand<Emote>(emote =>
@@ -117,7 +125,7 @@ namespace destiny_chat_client.ViewModels
 
             OpenWebsiteCommand = new RelayCommand(() => Process.Start("https://www.destiny.gg/bigscreen"));
 
-            RetrieveDetailsCommand = new RelayCommand(() => ChatService.FindDetails());
+            RetrieveDetailsCommand = new RelayCommand(() => ChatService.FindDetails(), () => !SettingsRepository.LoggedIn);
             TrayCommand = new RelayCommand(() => new Tray(SimpleIoc.Default.GetInstance<ISettingsRepository>()));
             AutoCompleteCommand = new RelayCommand(AutoComplete);
 
