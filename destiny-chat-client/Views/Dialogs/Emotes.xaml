@@ -42,15 +42,18 @@
             </ListBox.ItemContainerStyle>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" />
+                    <UniformGrid Columns="7" />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Image ToolTip="{Binding .}" Source="{Binding ., Converter={StaticResource EmoteConverter}}">
+                    <Image ToolTip="{Binding}" Source="{Binding Converter={StaticResource EmoteConverter}}" Margin="-32, 0" >
+                        <Image.RenderTransform>
+                            <ScaleTransform ScaleX="0.75" ScaleY="0.75"  />
+                        </Image.RenderTransform>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDown">
-                                <i:InvokeCommandAction CommandParameter="{Binding .}"
+                                <i:InvokeCommandAction CommandParameter="{Binding}"
                                                        Command="{Binding ElementName=EmoteWindow, Path=DataContext.UseEmoteCommand}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
