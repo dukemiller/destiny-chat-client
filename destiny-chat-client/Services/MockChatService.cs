@@ -32,11 +32,11 @@ namespace destiny_chat_client.Services
 
         private async void MessageLoop()
         {
-            Users.Add(new UserData { Username = _settingsRepository.Username });
-            Users.Add(new UserData { Username = "Destiny", Features = { Feature.Admin, Feature.Broadcaster } });
-            Users.Add(new UserData { Username = "The_memer" });
-            Users.Add(new UserData { Username = "CaptainAutismo" });
-            Users.Add(new UserData { Username = "I_have_osteoperosis" });
+            Users.Add(new UserData {Username = _settingsRepository.Username});
+            Users.Add(new UserData {Username = "Destiny", Features = {Feature.Admin, Feature.Broadcaster}});
+            Users.Add(new UserData {Username = "The_memer"});
+            Users.Add(new UserData {Username = "CaptainAutismo"});
+            Users.Add(new UserData {Username = "I_have_osteoperosis"});
 
             MessageReceived(new Data(new Message
             {
@@ -69,7 +69,7 @@ namespace destiny_chat_client.Services
                         {
                             Username = "Destiny",
                             Text = "die kids",
-                            Features = { Feature.Admin, Feature.Broadcaster }
+                            Features = {Feature.Admin, Feature.Broadcaster}
                         }));
 
                         foreach (var _ in Enumerable.Range(0, random.Next(32, 132)))
@@ -78,7 +78,7 @@ namespace destiny_chat_client.Services
                             {
                                 Username = "Destiny",
                                 Text = "nathanRustle",
-                                FeaturesAsStrings = { "admin", "flair8", "flair12", }
+                                FeaturesAsStrings = {"admin", "flair8", "flair12",}
                             }));
 
                             await Task.Delay(random.Next(10, 355));
@@ -90,15 +90,67 @@ namespace destiny_chat_client.Services
                                 {
                                     Username = "Desto",
                                     Text = "SOTRIGGERED",
-                                    FeaturesAsStrings = { "flair2", "flair7" }
+                                    FeaturesAsStrings = {"flair2", "flair7"}
                                 }));
                             await Task.Delay(random.Next(400, 900));
 
-                            MessageReceived(new Data(new Message { Username = "Besto", Text = "SOTRIGGERED" }));
+                            MessageReceived(new Data(new Message {Username = "Besto", Text = "SOTRIGGERED"}));
                             await Task.Delay(random.Next(400, 500));
                         }
                         break;
                     }
+
+                    case DebugScenario.EmoteAndMessageCombos:
+                    {
+                        var message = RandomMessage();
+
+                        // Message
+                        MessageReceived(new Data(new Message
+                        {
+                            Username = $"username_{number++}",
+                            Text = message
+                        }));
+                        await Task.Delay(500);
+
+                        MessageReceived(new Data(new Message
+                        {
+                            Username = $"username_{number++}",
+                            Text = message + " "
+                        }));
+                        await Task.Delay(500);
+
+                        MessageReceived(new Data(new Message
+                        {
+                            Username = $"username_{number++}",
+                            Text = message + "  "
+                        }));
+                        await Task.Delay(500);
+
+                        // Emote
+                        MessageReceived(new Data(new Message
+                        {
+                            Username = $"username_{number++}",
+                            Text = "nathanRustle"
+                        }));
+                        await Task.Delay(500);
+
+                        MessageReceived(new Data(new Message
+                        {
+                            Username = $"username_{number++}",
+                            Text = "nathanRustle "
+                        }));
+                        await Task.Delay(500);
+
+                        MessageReceived(new Data(new Message
+                        {
+                            Username = $"username_{number++}",
+                            Text = "nathanRustle  "
+                        }));
+                        await Task.Delay(500);
+
+                        break;
+                    }
+
 
                     case DebugScenario.LongMessages:
                     {
@@ -162,7 +214,7 @@ namespace destiny_chat_client.Services
                         {
                             Username = $"Username_{number}",
                             Text = "A basic message.",
-                            Features = { Feature.Admin, Feature.Broadcaster }
+                            Features = {Feature.Admin, Feature.Broadcaster}
                         }));
 
                         await Task.Delay(3000);
@@ -171,7 +223,7 @@ namespace destiny_chat_client.Services
                         {
                             Username = $"Username_{number++}",
                             Text = $"Goodbye {_settingsRepository.Username}",
-                            Features = { Feature.Admin, Feature.Broadcaster }
+                            Features = {Feature.Admin, Feature.Broadcaster}
                         }));
 
                         await Task.Delay(3000);
@@ -180,7 +232,7 @@ namespace destiny_chat_client.Services
                         {
                             Username = $"Username_{number}",
                             Text = $"Hello.",
-                            Features = { Feature.Admin, Feature.Broadcaster }
+                            Features = {Feature.Admin, Feature.Broadcaster}
                         }));
 
                         await Task.Delay(3000);
@@ -189,7 +241,7 @@ namespace destiny_chat_client.Services
                         {
                             Username = $"Username_{number++}",
                             Text = $"{_settingsRepository.Username} HMMStiny",
-                            Features = { Feature.Admin, Feature.Broadcaster }
+                            Features = {Feature.Admin, Feature.Broadcaster}
                         }));
 
                         await Task.Delay(3000);
@@ -202,7 +254,7 @@ namespace destiny_chat_client.Services
                         {
                             Username = "Destiny",
                             Text = "https://www.google.com",
-                            FeaturesAsStrings = { "admin", "flair8", "flair12", }
+                            FeaturesAsStrings = {"admin", "flair8", "flair12",}
                         }));
 
                         await Task.Delay(1000);
@@ -211,7 +263,7 @@ namespace destiny_chat_client.Services
                         {
                             Username = "Destiny",
                             Text = "http://www.google.com",
-                            FeaturesAsStrings = { "admin", "flair8", "flair12", }
+                            FeaturesAsStrings = {"admin", "flair8", "flair12",}
                         }));
 
                         await Task.Delay(1000);
@@ -220,7 +272,7 @@ namespace destiny_chat_client.Services
                         {
                             Username = "Destiny",
                             Text = "https://google.com",
-                            FeaturesAsStrings = { "admin", "flair8", "flair12", }
+                            FeaturesAsStrings = {"admin", "flair8", "flair12",}
                         }));
 
                         await Task.Delay(1000);
@@ -229,7 +281,7 @@ namespace destiny_chat_client.Services
                         {
                             Username = "Destiny",
                             Text = "https://www.destiny.gg",
-                            FeaturesAsStrings = { "admin", "flair8", "flair12", }
+                            FeaturesAsStrings = {"admin", "flair8", "flair12",}
                         }));
 
                         await Task.Delay(1000);
@@ -238,7 +290,7 @@ namespace destiny_chat_client.Services
                         {
                             Username = "Destiny",
                             Text = "destiny.com",
-                            FeaturesAsStrings = { "admin", "flair8", "flair12", }
+                            FeaturesAsStrings = {"admin", "flair8", "flair12",}
                         }));
 
                         await Task.Delay(1000);
@@ -247,7 +299,7 @@ namespace destiny_chat_client.Services
                         {
                             Username = "Destiny",
                             Text = "www.destiny.gg",
-                            FeaturesAsStrings = { "admin", "flair8", "flair12", }
+                            FeaturesAsStrings = {"admin", "flair8", "flair12",}
                         }));
 
                         await Task.Delay(1000);
@@ -372,9 +424,11 @@ namespace destiny_chat_client.Services
 
         public void StartReceivingMessages() => MessageLoop();
 
-        public void StopReceivingMessages() {}
+        public void StopReceivingMessages()
+        {
+        }
 
-        public void SendMessage(string text) => MessageReceived(new Data(new Message { Username = "Me", Text = text }));
+        public void SendMessage(string text) => MessageReceived(new Data(new Message {Username = "Me", Text = text}));
 
         void IChatService.Login(string sid, string rememberme) => throw new NotImplementedException();
 

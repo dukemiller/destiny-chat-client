@@ -4,6 +4,7 @@
     {
         Silence,
         Emotes,
+        EmoteAndMessageCombos,
         LongMessages,
         Mention,
         UserMentionOtherUsers,
