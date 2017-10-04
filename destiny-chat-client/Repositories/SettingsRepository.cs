@@ -22,6 +22,8 @@ namespace destiny_chat_client.Repositories
 
         private string _highlightWords = "";
 
+        private string _highlightNames = "Destiny";
+
         private bool _showFlair = true;
 
         private bool _showTimestamp;
@@ -136,8 +138,19 @@ namespace destiny_chat_client.Repositories
             set => Set(() => HighlightWords, ref _highlightWords, value);
         }
 
+        [JsonProperty("highlight_names")]
+        public string HighlightNames
+        {
+            get => _highlightNames;
+            set => Set(() => HighlightNames, ref _highlightNames, value);
+        }
+
         [JsonIgnore]
         public IEnumerable<string> HighlightWordsList => HighlightWords
+            .Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+        
+        [JsonIgnore]
+        public IEnumerable<string> HighlightNamesList => HighlightNames
             .Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
 
         [JsonIgnore]

@@ -386,6 +386,6 @@ namespace destiny_chat_client.Services
 
         public ObservableCollection<UserData> Users { get; set; } = new ObservableCollection<UserData>();
 
-        public ObservableCollection<UserData> OrderedUsers { get; }
+        public ObservableCollection<UserData> OrderedUsers { get; } = new ObservableCollection<UserData>();
     }
 }

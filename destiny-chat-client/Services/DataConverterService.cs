@@ -100,7 +100,8 @@ namespace destiny_chat_client.Services
             // ##
 
             // Set a highlight
-            if (_settingsRepository.HighlightWordsList.Any(word => message.Text.ToLower().Contains(word.ToLower())))
+            if ( _settingsRepository.HighlightNamesList.Any(name => string.Equals(message.Username, name, StringComparison.InvariantCultureIgnoreCase)) 
+                || _settingsRepository.HighlightWordsList.Any(word => message.Text.ToLower().Contains(word.ToLower())))
                 message.Mention = true;
 
             // Settings notifications
@@ -361,7 +362,7 @@ namespace destiny_chat_client.Services
             BindingOperations.SetBinding(run, TextElement.ForegroundProperty, Highlighted(model));
             run.MouseEnter += (sender, args) => run.TextDecorations = Styling.Underline;
             run.MouseLeave += (sender, args) => run.TextDecorations = null;
-            run.MouseDown += (sender, args) => ChatViewModel.HighlightUsernameCommand.Execute((username, text));
+            run.MouseDown += (sender, args) => ChatViewModel?.HighlightUsernameCommand?.Execute((username, text));
 
             return run;
         }

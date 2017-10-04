@@ -28,8 +28,15 @@ namespace destiny_chat_client.Repositories.Interfaces
         ///     The user preferenced words to be highlighted
         /// </summary>
         string HighlightWords { get; set; }
-
+        
         IEnumerable<string> HighlightWordsList { get; }
+
+        /// <summary>
+        ///     The collection of names that if a post is from any of these people, highlight the post
+        /// </summary>
+        string HighlightNames { get; set; }
+        
+        IEnumerable<string> HighlightNamesList { get; }
 
         /// <summary>
         ///     The 'sid' key used for login authentication.

@@ -188,13 +188,20 @@
             <CheckBox IsChecked="{Binding SettingsRepository.ShowTimestamp}">
                 <Label ToolTip="Show the timestamp of posts before usernames." Margin="0,-2,0,0">Show time</Label>
             </CheckBox>
-            <Label>Custom highlight words:</Label>
-            <TextBox Foreground="White" Margin="5, 0" Background="#202020"
-                     Text="{Binding SettingsRepository.HighlightWords, UpdateSourceTrigger=PropertyChanged}" />
 
             <Separator Style="{StaticResource InvisibleSeparator}" />
 
-            <Label Style="{StaticResource Header}">Notifications</Label>
+            <Label Style="{StaticResource Header}">Highlist posts ...</Label>
+            <Label>Containing these words:</Label>
+            <TextBox Foreground="White" Margin="5, 0" Background="#202020"
+                     Text="{Binding SettingsRepository.HighlightWords, UpdateSourceTrigger=PropertyChanged}" />
+            <Label>From these users:</Label>
+            <TextBox Foreground="White" Margin="5, 0" Background="#202020"
+                     Text="{Binding SettingsRepository.HighlightNames, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Separator Style="{StaticResource InvisibleSeparator}" />
+
+            <Label Style="{StaticResource Header}">Notifications when minimized</Label>
             <CheckBox IsChecked="{Binding SettingsRepository.FlashOnMention}">
                 <Label ToolTip="Flash the icon on the bar a few times." Margin="0,-2,0,0">Flash icon</Label>
             </CheckBox>
