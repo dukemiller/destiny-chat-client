@@ -40,6 +40,8 @@ namespace destiny_chat_client.Repositories
 
         private bool _toastOnMention;
 
+        private bool _onlyComboEmotes = true;
+
         // 
 
         [JsonProperty("exit_to_tray")]
@@ -97,6 +99,13 @@ namespace destiny_chat_client.Repositories
         {
             get => _showTimestamp;
             set => Set(() => ShowTimestamp, ref _showTimestamp, value);
+        }
+
+        [JsonProperty("only_combo_emotes")]
+        public bool OnlyComboEmotes
+        {
+            get => _onlyComboEmotes;
+            set => Set(() => OnlyComboEmotes, ref _onlyComboEmotes, value);
         }
 
         [JsonProperty("flash_on_mention")]

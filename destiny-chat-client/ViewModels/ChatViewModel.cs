@@ -162,7 +162,8 @@ namespace destiny_chat_client.ViewModels
             HighlightTarget = null;
             Highlighting = false;
             foreach (var message in Chat)
-                message.Dimmed = false;
+                if (message != null)
+                    message.Dimmed = false;
         }
 
         private void Highlight(string username)

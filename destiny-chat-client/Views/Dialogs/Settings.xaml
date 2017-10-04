@@ -188,6 +188,10 @@
             <CheckBox IsChecked="{Binding SettingsRepository.ShowTimestamp}">
                 <Label ToolTip="Show the timestamp of posts before usernames." Margin="0,-2,0,0">Show time</Label>
             </CheckBox>
+            <CheckBox IsChecked="{Binding SettingsRepository.OnlyComboEmotes}">
+                <Label ToolTip="Only do combo meters of posts that are emotes." Margin="0,-2,0,0">Only combo emotes</Label>
+            </CheckBox>
+            
 
             <Separator Style="{StaticResource InvisibleSeparator}" />
 

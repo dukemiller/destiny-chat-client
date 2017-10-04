@@ -59,6 +59,11 @@ namespace destiny_chat_client.Repositories.Interfaces
         bool ShowTimestamp { get; set; }
 
         /// <summary>
+        ///     Only combo messages that are emotes
+        /// </summary>
+        bool OnlyComboEmotes { get; set; }
+
+        /// <summary>
         ///     Flash the application on mention of the user of the client.
         /// </summary>
         bool FlashOnMention { get; set; }

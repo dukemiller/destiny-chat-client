@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,7 @@ using destiny_chat_client.Repositories.Interfaces;
 using destiny_chat_client.Services.Interfaces;
 using destiny_chat_client.ViewModels;
 using GalaSoft.MvvmLight.Ioc;
+using MessageModel = destiny_chat_client.Models.Message;
 
 namespace destiny_chat_client.Views.Components
 {
@@ -19,9 +21,13 @@ namespace destiny_chat_client.Views.Components
     /// </summary>
     public partial class Message
     {
-        private static readonly IDataConverterService DataService = SimpleIoc.Default.GetInstance<IDataConverterService>();
+        private static readonly IDataConverterService DataService =
+            SimpleIoc.Default.GetInstance<IDataConverterService>();
 
         private static readonly IEmoteRepository EmoteRepository = SimpleIoc.Default.GetInstance<IEmoteRepository>();
+
+        private static readonly ISettingsRepository SettingsRepository =
+            SimpleIoc.Default.GetInstance<ISettingsRepository>();
 
         private static readonly ChatViewModel ChatViewModel = SimpleIoc.Default.GetInstance<ChatViewModel>();
 
@@ -44,8 +50,8 @@ namespace destiny_chat_client.Views.Components
         {
             Application.Current?.Dispatcher?.Invoke(() =>
             {
-                var border = (Border)Content;
-                var textbox = (RichTextBox)border.Child;
+                var border = (Border) Content;
+                var textbox = (RichTextBox) border.Child;
 
                 DataContextChanged -= Message_SetModel;
                 textbox.PreviewMouseDown -= RichTextBoxDefocus;
@@ -64,73 +70,85 @@ namespace destiny_chat_client.Views.Components
         {
             if (DataContext != null)
             {
-                var message = (Models.Message)((Message)sender).DataContext;
-                var textbox = (RichTextBox)((Border)((Message)sender).Content).Child;
-                var previous = DataService.LastMessage?.DataContext as Models.Message;
+                var textbox = (RichTextBox) ((Border) ((Message) sender).Content).Child;
+                var currentMessage = (MessageModel) ((Message) sender).DataContext;
+                var previousMessage = DataService.LastMessage?.DataContext as MessageModel;
 
-                EmoteComboCheck();
+                CombinationCheck(previousMessage, currentMessage);
                 textbox.Document.Blocks.Clear();
-                textbox.Document.Blocks.Add(DataService.MessageToParagraph(message));
+                textbox.Document.Blocks.Add(DataService.MessageToParagraph(currentMessage));
                 DataService.LastMessage = this;
-
-                // 
-
-                void EmoteComboCheck()
-                {
-                    if (IsCascadingEmote())
-                    {
-                        // Add to known combo spot
-                        if (_inCombo)
-                        {
-                            DataService.Combo.Run.Text = $"{++_comboCount}x";
-                            DataService.Combo.Run.FontSize = Math.Min(12 + (0.25 * (_comboCount) - (2 * 0.25)), 20);
-                        }
-
-                        // start the combo
-                        else
-                        {
-                            _inCombo = true;
-                            _comboCount = 2;
-                            var last = (RichTextBox)((Border)DataService.LastMessage.Content).Child;
-                            var paragraph = (Paragraph)last.Document.Blocks.FirstBlock;
-                            // var paragraph = ((RichTextBox) (Paragraph) DataService.LastMessage).Document.Blocks.FirstBlock;
-                            DataService.Combo = new ComboMessage { Run = { Text = $"{_comboCount}x" } };
-
-                            // Skip timestamp
-                            var content = new Stack<Inline>(paragraph.Inlines.Skip(1));
-
-                            // Don't remove last thing (emote)
-                            content.Pop();
-
-                            // Remove everything else
-                            while (content.Count > 0)
-                                paragraph.Inlines.Remove(content.Pop());
-
-                            paragraph.Inlines.Add(DataService.Combo);
-                        }
-
-                        Visibility = Visibility.Collapsed;
-                    }
-
-                    // no combo
-                    else
-                    {
-                        _inCombo = false;
-                        _comboCount = 1;
-                        DataService.Combo = null;
-                    }
-
-                    bool IsCascadingEmote()
-                    {
-                        if (previous == null)
-                            return false;
-                        var currentIsEmotion = EmoteRepository.HasEmote(message.Text);
-                        var previousIsEmoticon = EmoteRepository.HasEmote(previous.Text);
-                        var currentEqualsPrevious = previous.Text.Equals(message.Text);
-                        return currentIsEmotion && previousIsEmoticon && currentEqualsPrevious;
-                    }
-                }
             }
+        }
+
+        private void CombinationCheck(MessageModel previous, MessageModel current)
+        {
+            if (IsCascadingMessage(previous, current))
+            {
+                // Add to known combo spot
+                if (_inCombo)
+                {
+                    DataService.Combo.Run.Text = $"{++_comboCount}x";
+                    DataService.Combo.Run.FontSize = Math.Min(12 + (0.25 * (_comboCount) - (2 * 0.25)), 20);
+                }
+
+                // start the combo
+                else
+                {
+                    _inCombo = true;
+                    _comboCount = 2;
+                    var last = (RichTextBox) ((Border) DataService.LastMessage.Content).Child;
+                    var paragraph = (Paragraph) last.Document.Blocks.FirstBlock;
+                    // var paragraph = ((RichTextBox) (Paragraph) DataService.LastMessage).Document.Blocks.FirstBlock;
+                    DataService.Combo = new ComboMessage {Run = {Text = $"{_comboCount}x"}};
+
+                    // Skip timestamp
+                    var content = new Stack<Inline>(paragraph.Inlines.Skip(1));
+
+                    // Don't remove last thing (emote)
+                    content.Pop();
+
+                    // Remove everything else
+                    while (content.Count > 0)
+                        paragraph.Inlines.Remove(content.Pop());
+
+                    paragraph.Inlines.Add(DataService.Combo);
+                }
+
+                Visibility = Visibility.Collapsed;
+            }
+
+            // no combo
+            else
+            {
+                _inCombo = false;
+                _comboCount = 1;
+                DataService.Combo = null;
+            }
+        }
+
+        private static bool IsCascadingMessage(MessageModel previous, MessageModel current)
+        {
+            if (previous == null)
+                return false;
+
+            var result = true;
+
+            // current message equals previous
+            var (previousMessage, currentMessage) = 
+                (Regex.Replace(previous.Text, @"\s+", ""), 
+                 Regex.Replace(current.Text, @"\s+", ""));
+
+            result &= previousMessage == currentMessage;
+
+            if (SettingsRepository.OnlyComboEmotes)
+            {
+                // Current and previous messages are emotes
+                result &= EmoteRepository.HasEmote(currentMessage);
+                result &= EmoteRepository.HasEmote(previousMessage);
+            }
+
+            return result;
         }
 
         private async void FadeIn()
@@ -163,7 +181,7 @@ namespace destiny_chat_client.Views.Components
         // https://social.msdn.microsoft.com/Forums/vstudio/en-US/e897e946-7845-48f9-b9f2-ac2ab1dd3d24/copy-image-tag-as-text-from-richtextbox?forum=wpf
         private void CommandBinding_OnExecuted(object sender, RoutedEventArgs e)
         {
-            var selection = ((RichTextBox)sender).Selection;
+            var selection = ((RichTextBox) sender).Selection;
             var navigator = selection.Start.GetPositionAtOffset(0, LogicalDirection.Forward);
             var end = selection.End;
             var buffer = new StringBuilder();
